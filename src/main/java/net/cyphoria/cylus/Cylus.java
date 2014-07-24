@@ -29,7 +29,7 @@ public class Cylus {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello World";
+        return "Hello Stefan";
     }
 
     public static void main(String[] args) {
