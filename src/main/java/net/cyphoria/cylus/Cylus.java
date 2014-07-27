@@ -17,20 +17,15 @@ package net.cyphoria.cylus;/*
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author Stefan Penndoorf <stefan@cyphoria.net>
  */
 @EnableAutoConfiguration
-@RestController
+@ComponentScan
 public class Cylus {
 
-    @RequestMapping("/")
-    public String home() {
-        return "Hello Stefan";
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(Cylus.class, args);
