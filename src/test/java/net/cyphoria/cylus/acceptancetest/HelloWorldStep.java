@@ -2,6 +2,7 @@ package net.cyphoria.cylus.acceptancetest;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.io.IOException;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -57,5 +59,15 @@ public class HelloWorldStep {
     @Then("^kann ich \"([^\"]*)\" lesen$")
     public void kann_ich_lesen(String arg1) throws Throwable {
         assertThat(driver.getPageSource(), containsString(arg1));
+    }
+
+    @Then("^wird der Titel \"([^\"]*)\" angezeigt$")
+    public void wird_der_Titel_angezeigt(String titel) throws Throwable {
+        assertThat(driver.getTitle(), is(titel));
+    }
+
+    @And("^wird die Überschrift \"([^\"]*)\" angezeigt$")
+    public void wird_die_Überschrift_angezeigt(String ueberschrift) throws Throwable {
+        assertThat(driver.findElementByCssSelector("h1#title").getText(), is(ueberschrift));
     }
 }
