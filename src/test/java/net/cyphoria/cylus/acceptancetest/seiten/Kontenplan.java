@@ -15,16 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.acceptancetest;
+package net.cyphoria.cylus.acceptancetest.seiten;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import org.fluentlenium.core.FluentPage;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-@RunWith(Cucumber.class)
-@CucumberOptions(format = "pretty", features = "src/test/resources/net/cyphoria/cylus/features")
-public class RunCucumberTest {
+public class Kontenplan extends FluentPage {
+
+    @Override
+    public String getUrl() {
+        return "http://localhost/kontenplan";
+    }
+
+    @Override
+    public void isAt() {
+        assertThat(title(), containsString("Kontenplan"));
+        assertThat(findFirst("h1#title").getText(), is("Kontenplan"));
+    }
 }

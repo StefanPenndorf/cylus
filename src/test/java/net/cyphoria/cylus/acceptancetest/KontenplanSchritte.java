@@ -17,14 +17,20 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import cucumber.api.java.en.Given;
+import net.cyphoria.cylus.acceptancetest.seiten.Kontenplan;
+import org.fluentlenium.core.annotation.Page;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-@RunWith(Cucumber.class)
-@CucumberOptions(format = "pretty", features = "src/test/resources/net/cyphoria/cylus/features")
-public class RunCucumberTest {
+public class KontenplanSchritte extends AbstractSchritte {
+
+    @Page
+    private Kontenplan kontenplan;
+
+    @Given("^ich habe den Kontenplan geöffnet$")
+    public void ich_habe_den_Kontenplan_geöffnet() throws Throwable {
+        goTo(kontenplan).isAt();
+    }
 }

@@ -1,4 +1,4 @@
-package net.cyphoria.cylus;/*
+/*
  * Copyright (c) Stefan Penndorf 2014
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,6 +14,8 @@ package net.cyphoria.cylus;/*
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package net.cyphoria.cylus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
