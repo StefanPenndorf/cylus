@@ -39,6 +39,9 @@ public class NeuesKontoSeite extends FluentPage {
     @FindBy(css = "#kontoArt")
     FluentWebElement kontoArt;
 
+    @FindBy(css = "input[type=submit]")
+    FluentWebElement kontoAnlegen;
+
 
     @Override
     public String getUrl() {
@@ -51,6 +54,7 @@ public class NeuesKontoSeite extends FluentPage {
         kontoNummer.fill().with("4101");
         kontoName.fill().with("Lebensmittel");
         kontoArt.fill().fillSelect("select").withText("Aufwand");
+        kontoAnlegen.click();
         return this;
     }
 
