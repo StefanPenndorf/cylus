@@ -17,12 +17,7 @@
 
 package net.cyphoria.cylus;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 
@@ -33,18 +28,8 @@ import org.springframework.data.neo4j.config.Neo4jConfiguration;
 @EnableNeo4jRepositories(basePackages = "net.cyphoria.cylus.repositories")
 public class CylusNeo4jConfiguration extends Neo4jConfiguration {
 
-    @Autowired
-    private Environment environment;
-
     public CylusNeo4jConfiguration() {
         setBasePackage("net.cyphoria.cylus.domain");
     }
-
-    @Bean
-    public GraphDatabaseService graphDatabaseService() {
-        final String path = environment.getProperty("cylus.neo4j.db.path", "cylus.db");
-        return new GraphDatabaseFactory().newEmbeddedDatabase(path);
-    }
-
 
 }
