@@ -40,7 +40,7 @@ public class Cylus {
 
     @Bean
     GraphDatabaseService graphDatabaseService() {
-        final String path = environment.getProperty("cylus.neo4j.db.path", "cylus.db");
+        final String path = environment.getProperty("cylus.neo4j.db.path", "target/cylus.db");
         return new GraphDatabaseFactory().newEmbeddedDatabase(path);
     }
 
