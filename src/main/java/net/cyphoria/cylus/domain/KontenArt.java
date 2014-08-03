@@ -15,35 +15,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.acceptancetest.seiten;
+package net.cyphoria.cylus.domain;
 
-import org.fluentlenium.core.FluentPage;
-
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
+import org.springframework.data.neo4j.annotation.NodeEntity;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class Kontenplan extends FluentPage {
+@NodeEntity
+public class KontenArt {
 
+    @GraphId private Long id;
+
+    @Indexed public String name;
+
+    public KontenArt() {}
+
+    public KontenArt(final String name) {
+        this.name = name;
+    }
 
 
     @Override
-    public String getUrl() {
-        return "/kontenplan";
-    }
-
-    @Override
-    public void isAt() {
-        assertThat("Title tag", title(), containsString("Kontenplan"));
-        assertThat("Ueberschrift",findFirst("h1#title").getText(), is("Kontenplan"));
-    }
-
-    public NeuesKontoSeite legeNeuesKontoAn() {
-        final NeuesKontoSeite neuesKontoSeite = createPage(NeuesKontoSeite.class);
-        goTo(neuesKontoSeite).isAt();
-        return neuesKontoSeite.legeKontoAn();
+    public String toString() {
+        return "KontenArt{name='" + name + "'}";
     }
 }

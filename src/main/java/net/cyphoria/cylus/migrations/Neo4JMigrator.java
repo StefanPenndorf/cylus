@@ -15,35 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.acceptancetest.seiten;
+package net.cyphoria.cylus.migrations;
 
-import org.fluentlenium.core.FluentPage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import java.util.List;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class Kontenplan extends FluentPage {
+@Component
+public class Neo4JMigrator implements ApplicationListener<ContextRefreshedEvent> {
 
+    @Autowired
+    private List<Migration> migrationList;
 
 
     @Override
-    public String getUrl() {
-        return "/kontenplan";
+    public void onApplicationEvent(final ContextRefreshedEvent contextRefreshedEvent) {
+        migrationList.forEach(Migration::migrate);
     }
 
-    @Override
-    public void isAt() {
-        assertThat("Title tag", title(), containsString("Kontenplan"));
-        assertThat("Ueberschrift",findFirst("h1#title").getText(), is("Kontenplan"));
-    }
-
-    public NeuesKontoSeite legeNeuesKontoAn() {
-        final NeuesKontoSeite neuesKontoSeite = createPage(NeuesKontoSeite.class);
-        goTo(neuesKontoSeite).isAt();
-        return neuesKontoSeite.legeKontoAn();
-    }
 }

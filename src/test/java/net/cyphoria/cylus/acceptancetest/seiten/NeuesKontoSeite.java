@@ -18,32 +18,44 @@
 package net.cyphoria.cylus.acceptancetest.seiten;
 
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.support.FindBy;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class Kontenplan extends FluentPage {
+public class NeuesKontoSeite extends FluentPage {
 
+    @FindBy(css = "#kontoNummer")
+    FluentWebElement kontoNummer;
+
+
+    @FindBy(css = "#kontoName")
+    FluentWebElement kontoName;
+
+    @FindBy(css = "#kontoArt")
+    FluentWebElement kontoArt;
 
 
     @Override
     public String getUrl() {
-        return "/kontenplan";
+        return "/konto/neu";
+    }
+
+
+    public NeuesKontoSeite legeKontoAn() {
+        isAt();
+        kontoNummer.fill().with("4101");
+        kontoName.fill().with("Lebensmittel");
+        kontoArt.fill().fillSelect("select").withText("Aufwand");
+        return this;
     }
 
     @Override
     public void isAt() {
-        assertThat("Title tag", title(), containsString("Kontenplan"));
-        assertThat("Ueberschrift",findFirst("h1#title").getText(), is("Kontenplan"));
-    }
-
-    public NeuesKontoSeite legeNeuesKontoAn() {
-        final NeuesKontoSeite neuesKontoSeite = createPage(NeuesKontoSeite.class);
-        goTo(neuesKontoSeite).isAt();
-        return neuesKontoSeite.legeKontoAn();
+        assertThat(title(), containsString("Neues Konto anlegen"));
     }
 }

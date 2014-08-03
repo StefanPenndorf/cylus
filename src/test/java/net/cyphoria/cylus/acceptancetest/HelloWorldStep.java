@@ -33,6 +33,7 @@ public class HelloWorldStep extends AbstractSchritte {
 
     @Given("^die Anwendung ist gestartet$")
     public void die_Anwendung_ist_gestartet() throws Throwable {
+        // nichts zu tun
     }
 
     @When("^ich die erste Seite aufrufe$")
@@ -41,17 +42,17 @@ public class HelloWorldStep extends AbstractSchritte {
     }
 
     @Then("^kann ich \"([^\"]*)\" lesen$")
-    public void kann_ich_lesen(String arg1) throws Throwable {
+    public void kann_ich_lesen(final String arg1) throws Throwable {
         assertThat(pageSource(), containsString(arg1));
     }
 
     @Then("^wird der Titel \"([^\"]*)\" angezeigt$")
-    public void wird_der_Titel_angezeigt(String titel) throws Throwable {
+    public void wird_der_Titel_angezeigt(final String titel) throws Throwable {
         assertThat(title(), is(titel));
     }
 
     @And("^wird die Überschrift \"([^\"]*)\" angezeigt$")
-    public void wird_die_Überschrift_angezeigt(String ueberschrift) throws Throwable {
+    public void wird_die_Überschrift_angezeigt(final String ueberschrift) throws Throwable {
         assertThat(findFirst("h1#title").getText(), is(ueberschrift));
     }
 }

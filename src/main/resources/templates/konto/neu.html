@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<head>
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+    <title>Neues Konto anlegen</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Neues Konto anlegen</h2>
+    <form method="post" action="/konto/new">
+        <label for="kontoNummer">Kontonummer*</label>
+        <input name="kontoNummer" id="kontoNummer" size="4" maxlength="4" tabindex="1"/>
+
+        <label for="kontoName">Kontoname*</label>
+        <input name="kontoName" id="kontoName" size="30" maxlength="50" tabindex="2"/>
+
+        <label for="kontoArt">Kontoart*</label>
+        <select name="kontoArt" id="kontoArt" tabindex="3">
+            <option th:each="kontenArt:${kontenArten}" th:value="${kontenArt.name}" th:text="${kontenArt.name}">
+                Aufwand
+            </option>
+        </select>
+
+        <input type="submit" value="Konto anlegen" />
+
+
+    </form>
+
+</div>
+</body>
+</html>

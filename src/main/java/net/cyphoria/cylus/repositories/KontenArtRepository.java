@@ -15,28 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.acceptancetest;
+package net.cyphoria.cylus.repositories;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
-import net.cyphoria.cylus.acceptancetest.seiten.Kontenplan;
-import org.fluentlenium.core.annotation.Page;
+import net.cyphoria.cylus.domain.KontenArt;
+import org.springframework.data.neo4j.repository.CRUDRepository;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class KontenplanSchritte extends AbstractSchritte {
+public interface KontenArtRepository extends CRUDRepository<KontenArt> {
 
-    @Page
-    private Kontenplan kontenplan;
+    KontenArt findByName(String name);
 
-    @Given("^ich habe den Kontenplan geöffnet$")
-    public void ich_habe_den_Kontenplan_geöffnet() throws Throwable {
-        goTo(kontenplan).await().untilPage();
-    }
-
-    @When("^ich ein neues Konto anlege$")
-    public void ich_ein_neues_Konto_anlege() throws Throwable {
-        kontenplan.legeNeuesKontoAn();
-    }
 }

@@ -15,28 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.acceptancetest;
-
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
-import net.cyphoria.cylus.acceptancetest.seiten.Kontenplan;
-import org.fluentlenium.core.annotation.Page;
+package net.cyphoria.cylus.migrations;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class KontenplanSchritte extends AbstractSchritte {
+public interface Migration {
 
-    @Page
-    private Kontenplan kontenplan;
+    void migrate();
 
-    @Given("^ich habe den Kontenplan geöffnet$")
-    public void ich_habe_den_Kontenplan_geöffnet() throws Throwable {
-        goTo(kontenplan).await().untilPage();
-    }
-
-    @When("^ich ein neues Konto anlege$")
-    public void ich_ein_neues_Konto_anlege() throws Throwable {
-        kontenplan.legeNeuesKontoAn();
-    }
 }

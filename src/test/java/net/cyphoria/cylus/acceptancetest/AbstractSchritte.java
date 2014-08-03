@@ -36,7 +36,7 @@ import java.io.IOException;
  */
 @WebAppConfiguration
 @ContextConfiguration(classes = Cylus.class)
-public abstract class AbstractSchritte extends FluentAdapter {
+abstract class AbstractSchritte extends FluentAdapter {
 
     @Autowired
     private WebApplicationContext context;
@@ -45,10 +45,12 @@ public abstract class AbstractSchritte extends FluentAdapter {
 
     @PostConstruct
     public void setup() throws IOException {
-        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        final MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
         driver = new MockMvcHtmlUnitDriver(mockMvc, true);
-        this.initFluent(driver);
-        this.initTest();
+        // MockMvc will use cylus as servlet path but we don't use servlet
+        withDefaultUrl("http://localhost/cylus/");
+        initFluent(driver);
+        initTest();
     }
 
     @PreDestroy

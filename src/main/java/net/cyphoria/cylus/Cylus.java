@@ -20,16 +20,17 @@ package net.cyphoria.cylus;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Stefan Penndoorf <stefan@cyphoria.net>
  */
 @EnableAutoConfiguration
+@EnableTransactionManagement
 @ComponentScan
-public class Cylus {
+public final class Cylus {
 
-
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(Cylus.class, args);
     }
 
