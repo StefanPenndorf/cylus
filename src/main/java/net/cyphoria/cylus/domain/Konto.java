@@ -20,21 +20,44 @@ package net.cyphoria.cylus.domain;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @NodeEntity
-public class KontenArt {
+public class Konto {
 
     @GraphId private Long id;
 
-    @Indexed public String name;
+    @Indexed private Integer kontoNummer;
 
-    public KontenArt() {}
+    private String kontoName;
 
-    public KontenArt(final String name) {
-        this.name = name;
+
+    @RelatedTo(type = "gehört zu")
+    private KontenArt kontenArt;
+
+    public Konto() { }
+
+    public Konto(final Integer kontoNummer, final String kontoName, final KontenArt kontenArt) {
+        this.kontoNummer = kontoNummer;
+        this.kontoName = kontoName;
+        this.kontenArt = kontenArt;
+    }
+
+    @Override
+    public String toString() {
+        return "Konto{" +
+                "id=" + id +
+                ", kontoNummer=" + kontoNummer +
+                ", kontoName='" + kontoName + '\'' +
+                ", kontenArt=" + kontenArt +
+                '}';
+    }
+
+    public KontenArt getKontenArt() {
+        return kontenArt;
     }
 
     @Override
@@ -46,18 +69,16 @@ public class KontenArt {
             return false;
         }
 
-        final KontenArt kontenArt = (KontenArt) o;
+        final Konto konto = (Konto) o;
 
-        return name.equals(kontenArt.name);
+        return kontoName.equals(konto.kontoName) && kontoNummer.equals(konto.kontoNummer);
+
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "KontenArt{name='" + name + "'}";
+        int result = kontoNummer.hashCode();
+        result = 31 * result + kontoName.hashCode();
+        return result;
     }
 }
