@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.controller;
+package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
 import net.cyphoria.cylus.domain.Konto;
-import net.cyphoria.cylus.forms.KontoForm;
-import net.cyphoria.cylus.repositories.KontenArtRepository;
-import net.cyphoria.cylus.repositories.KontoRepository;
+import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
+import net.cyphoria.cylus.domain.repositories.KontoRepository;
 import net.cyphoria.cylus.testsupport.MockitoRule;
+import net.cyphoria.cylus.web.forms.KontoForm;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

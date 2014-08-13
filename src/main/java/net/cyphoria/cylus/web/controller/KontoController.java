@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.controller;
+package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.forms.KontoForm;
-import net.cyphoria.cylus.repositories.KontenArtRepository;
-import net.cyphoria.cylus.repositories.KontoRepository;
+import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
+import net.cyphoria.cylus.domain.repositories.KontoRepository;
+import net.cyphoria.cylus.web.forms.KontoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

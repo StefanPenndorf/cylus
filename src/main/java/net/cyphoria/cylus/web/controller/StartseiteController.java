@@ -15,36 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.forms;
+package net.cyphoria.cylus.web.controller;
 
-import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.domain.Konto;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class KontoForm {
-    private String kontoNummer;
-    private String kontoName;
-    private String kontenArt;
+@Controller
+public class StartseiteController {
 
-    public KontoForm withKontoNummer(final int kontoNummer) {
-        this.kontoNummer = Integer.toString(kontoNummer);
-        return this;
+    @RequestMapping("/")
+    public String home() {
+        return "startseite";
     }
 
-
-    public KontoForm withKontoName(final String kontoName) {
-        this.kontoName = kontoName;
-        return this;
-    }
-
-    public KontoForm withKontenArt(final String kontenArt) {
-        this.kontenArt = kontenArt;
-        return this;
-    }
-
-    public Konto toKonto() {
-        return new Konto(Integer.valueOf(kontoNummer), kontoName, new KontenArt(kontenArt));
-    }
 }

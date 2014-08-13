@@ -15,21 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus;
+package net.cyphoria.cylus.domain.repositories;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
+import net.cyphoria.cylus.domain.KontenArt;
+import org.springframework.data.neo4j.repository.CRUDRepository;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-@Configuration
-@EnableNeo4jRepositories(basePackages = "net.cyphoria.cylus.repositories")
-public class CylusNeo4jConfiguration extends Neo4jConfiguration {
+public interface KontenArtRepository extends CRUDRepository<KontenArt> {
 
-    public CylusNeo4jConfiguration() {
-        setBasePackage("net.cyphoria.cylus.domain");
-    }
+    KontenArt findByName(String name);
 
 }

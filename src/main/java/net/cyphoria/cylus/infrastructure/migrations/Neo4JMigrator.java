@@ -15,45 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.migrations;
+package net.cyphoria.cylus.infrastructure.migrations;
 
-import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.repositories.KontenArtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @Component
-@Order(1)
-public class KontenArtPopulator implements Migration {
+public class Neo4JMigrator implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
-    private KontenArtRepository repository;
-
-    private static final List<KontenArt> KONTEN_ARTEN =
-            asList(
-                    "Aktiva",
-                    "Passiva",
-                    "Ertrag",
-                    "Aufwand",
-                    "Sonderkonten")
-            .stream().map(KontenArt::new).collect(toList());
+    private List<Migration> migrationList;
 
 
     @Override
-    @Transactional
-    public void migrate() {
-        KONTEN_ARTEN.stream()
-                .filter(k -> repository.findByName(k.name) == null)
-                .forEach(repository::save);
+    public void onApplicationEvent(final ContextRefreshedEvent contextRefreshedEvent) {
+        migrationList.forEach(Migration::migrate);
     }
+
 }

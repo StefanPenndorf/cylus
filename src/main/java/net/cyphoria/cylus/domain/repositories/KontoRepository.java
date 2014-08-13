@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.repositories;
+package net.cyphoria.cylus.domain.repositories;
 
 import net.cyphoria.cylus.domain.Konto;
 import org.springframework.data.neo4j.repository.CRUDRepository;

@@ -15,16 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.repositories;
+package net.cyphoria.cylus.web.controller;
 
-import net.cyphoria.cylus.domain.KontenArt;
-import org.springframework.data.neo4j.repository.CRUDRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public interface KontenArtRepository extends CRUDRepository<KontenArt> {
+@Controller
+@RequestMapping("/kontenplan")
+public class KontenplanController {
 
-    KontenArt findByName(String name);
+    @RequestMapping
+    public String zeigeKontenplan() {
+        return "kontenplan";
+    }
+
 
 }

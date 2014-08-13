@@ -15,28 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.migrations;
+package net.cyphoria.cylus.infrastructure;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
+import org.springframework.data.neo4j.config.Neo4jConfiguration;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-@Component
-public class Neo4JMigrator implements ApplicationListener<ContextRefreshedEvent> {
+@Configuration
+@EnableNeo4jRepositories(basePackages = "net.cyphoria.cylus.domain.repositories")
+public class CylusNeo4jConfiguration extends Neo4jConfiguration {
 
-    @Autowired
-    private List<Migration> migrationList;
-
-
-    @Override
-    public void onApplicationEvent(final ContextRefreshedEvent contextRefreshedEvent) {
-        migrationList.forEach(Migration::migrate);
+    public CylusNeo4jConfiguration() {
+        setBasePackage("net.cyphoria.cylus.domain");
     }
 
 }

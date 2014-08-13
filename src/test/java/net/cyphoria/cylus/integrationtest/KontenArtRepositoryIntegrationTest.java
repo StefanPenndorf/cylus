@@ -17,7 +17,7 @@ package net.cyphoria.cylus.integrationtest;/*
 
 import net.cyphoria.cylus.Cylus;
 import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.repositories.KontenArtRepository;
+import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

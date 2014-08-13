@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.migrations;
+package net.cyphoria.cylus.infrastructure.migrations;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
