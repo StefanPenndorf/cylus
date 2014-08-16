@@ -18,11 +18,10 @@
 package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
-import net.cyphoria.cylus.domain.repositories.KontoRepository;
+import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
+import net.cyphoria.cylus.service.konto.KontoService;
 import net.cyphoria.cylus.testsupport.MockitoRule;
-import net.cyphoria.cylus.web.forms.KontoForm;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,12 +31,9 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
 import static java.util.Collections.singletonList;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -56,13 +52,13 @@ public class KontoControllerTest {
     private KontenArtRepository kontoArtenRepository;
 
     @Mock
-    private KontoRepository kontoRepository;
+    private KontoService kontoService;
 
     private KontoController controller;
 
     @Before
     public void setup() {
-        controller = new KontoController(kontoArtenRepository, kontoRepository);
+        controller = new KontoController(kontoArtenRepository, kontoService);
     }
 
     @Test
@@ -84,24 +80,19 @@ public class KontoControllerTest {
     }
 
     @Test
-    public void postSpeichereNeuesKontoSpeichertDasKontoImRepository() {
-        final KontenArt kontenArt = new KontenArt("Aufwand");
-        final Konto konto = new Konto(4001, "Lebensmittel", kontenArt);
-        final KontoForm form = new KontoForm()
-                .withKontoNummer(4001)
-                .withKontoName("Lebensmittel")
-                .withKontenArt("Aufwand");
+    public void postSpeichereNeuesKontoLegtEinNeuesKontoAn() {
+        final KontoAnlageAnfrage anfrage = new KontoAnlageAnfrage();
 
-        controller.speichereNeuesKonto(form);
+        controller.speichereNeuesKonto(anfrage);
 
-        verify(kontoRepository).save((Konto)argThat(allOf(hasProperty("kontenArt", is(kontenArt)), is(konto))));
+        verify(kontoService).legeNeuesKontoAn(anfrage);
     }
 
     @Test
     public void postSpeichereNeuesKontoLeitetBeiErfolgZumKontenplan() {
-        final KontoForm form = new KontoForm().withKontoNummer(0);
+        final KontoAnlageAnfrage anfrage = new KontoAnlageAnfrage();
 
-        final String result = controller.speichereNeuesKonto(form);
+        final String result = controller.speichereNeuesKonto(anfrage);
 
         assertThat(result, is("redirect:/kontenplan"));
     }

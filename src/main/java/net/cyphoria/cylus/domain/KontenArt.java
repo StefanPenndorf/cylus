@@ -21,11 +21,16 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @NodeEntity
-public class KontenArt {
+public class KontenArt implements Serializable {
+
+    private static final long serialVersionUID = 2782423484039643855L;
 
     @GraphId private Long id;
 
@@ -34,6 +39,9 @@ public class KontenArt {
     public KontenArt() {}
 
     public KontenArt(final String name) {
+        if(name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("KontenArt benötigt einen Namen! War: <" + name + '>');
+        }
         this.name = name;
     }
 
@@ -48,12 +56,12 @@ public class KontenArt {
 
         final KontenArt kontenArt = (KontenArt) o;
 
-        return name.equals(kontenArt.name);
+        return Objects.equals(name, kontenArt.name);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return Objects.hash(name);
     }
 
     @Override

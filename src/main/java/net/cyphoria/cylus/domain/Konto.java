@@ -81,4 +81,8 @@ public class Konto {
         result = 31 * result + kontoName.hashCode();
         return result;
     }
+
+    public String getName() {
+        return kontoName;
+    }
 }

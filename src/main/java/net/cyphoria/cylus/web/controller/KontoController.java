@@ -19,8 +19,8 @@ package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
 import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
-import net.cyphoria.cylus.domain.repositories.KontoRepository;
-import net.cyphoria.cylus.web.forms.KontoForm;
+import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
+import net.cyphoria.cylus.service.konto.KontoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,12 +42,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class KontoController {
 
     private final KontenArtRepository kontoArtenRepository;
-    private final KontoRepository kontoRepository;
+
+    private final KontoService kontoService;
 
     @Autowired
-    public KontoController(final KontenArtRepository kontoArtenRepository, final KontoRepository kontoRepository) {
+    public KontoController(final KontenArtRepository kontoArtenRepository,
+                           final KontoService kontoService) {
         this.kontoArtenRepository = kontoArtenRepository;
-        this.kontoRepository = kontoRepository;
+        this.kontoService = kontoService;
     }
 
 
@@ -63,8 +65,8 @@ public class KontoController {
 
     @RequestMapping(value = "/neu", method = POST)
     @Transactional(readOnly = false)
-    public String speichereNeuesKonto(@ModelAttribute final KontoForm kontoForm) {
-        kontoRepository.save(kontoForm.toKonto());
+    public String speichereNeuesKonto(@ModelAttribute final KontoAnlageAnfrage anfrage) {
+        kontoService.legeNeuesKontoAn(anfrage);
         return "redirect:/kontenplan";
     }
 }
