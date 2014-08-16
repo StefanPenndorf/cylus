@@ -18,7 +18,9 @@
 package net.cyphoria.cylus.acceptancetest.seiten;
 
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentWebElement;
 
+import static org.fluentlenium.core.filter.FilterConstructor.withText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -41,9 +43,19 @@ public class Kontenplan extends FluentPage {
         assertThat("Ueberschrift",findFirst("h1#title").getText(), is("Kontenplan"));
     }
 
-    public NeuesKontoSeite legeNeuesKontoAn() {
+    public void zeigtKonto(final Integer kontoNummer, final String kontoName) {
+        final FluentWebElement kontoElem = find(".konto", withText(kontoNummer.toString())).first();
+
+        kontoElem.findFirst(".kontoNummer", withText(kontoNummer.toString()));
+        kontoElem.findFirst(".kontoName", withText(kontoName));
+    }
+
+    public NeuesKontoSeite legeNeuesKontoAn(
+            final Integer kontoNummer,
+            final String kontoName,
+            final String kontoArt) {
         final NeuesKontoSeite neuesKontoSeite = createPage(NeuesKontoSeite.class);
         goTo(neuesKontoSeite).isAt();
-        return neuesKontoSeite.legeKontoAn();
+        return neuesKontoSeite.legeKontoAn(kontoNummer, kontoName, kontoArt);
     }
 }

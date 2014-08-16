@@ -30,14 +30,14 @@ import static org.junit.Assert.assertThat;
 public class NeuesKontoSeite extends FluentPage {
 
     @FindBy(css = "#kontoNummer")
-    FluentWebElement kontoNummer;
+    FluentWebElement kontoNummerFeld;
 
 
     @FindBy(css = "#kontoName")
-    FluentWebElement kontoName;
+    FluentWebElement kontoNameFeld;
 
     @FindBy(css = "#kontoArt")
-    FluentWebElement kontoArt;
+    FluentWebElement kontoArtFeld;
 
     @FindBy(css = "input[type=submit]")
     FluentWebElement kontoAnlegen;
@@ -49,11 +49,11 @@ public class NeuesKontoSeite extends FluentPage {
     }
 
 
-    public NeuesKontoSeite legeKontoAn() {
+    public NeuesKontoSeite legeKontoAn(final Integer kontoNummer, final String kontoName, final String kontoArt) {
         isAt();
-        kontoNummer.fill().with("4101");
-        kontoName.fill().with("Lebensmittel");
-        kontoArt.fill().fillSelect("select").withText("Aufwand");
+        kontoNummerFeld.fill().with(kontoNummer.toString());
+        kontoNameFeld.fill().with(kontoName);
+        kontoArtFeld.fill().fillSelect("select").withText(kontoArt);
         kontoAnlegen.click();
         return this;
     }
