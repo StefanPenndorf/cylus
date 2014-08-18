@@ -28,9 +28,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.data.neo4j.conversion.QueryResultBuilder;
 
+import java.util.List;
 import java.util.Objects;
 
+import static java.util.Collections.singletonList;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,7 +45,11 @@ public class DefaultKontoServiceTest {
 
     private static final String KONTO_NAME = "Lebensmittel";
     private static final Integer KONTO_NUMMER = 4001;
-    private static final KontenArt KONTO_ART = new KontenArt("Aufwand");
+    private static final KontenArt KONTEN_ART = new KontenArt("Aufwand");
+    private static final List<KontenArt> KONTEN_ARTEN = singletonList(KONTEN_ART);
+    private static final QueryResultBuilder<KontenArt> RESULT_BUILDER =
+            new QueryResultBuilder<>(KONTEN_ARTEN);
+
     @Rule
     public final MockitoRule mockito = new MockitoRule();
 
@@ -54,17 +63,27 @@ public class DefaultKontoServiceTest {
 
     @Before
     public void setup() {
-        this.service = new DefaultKontoService(kontoRepository, kontenArtRepository);
+        service = new DefaultKontoService(kontoRepository, kontenArtRepository);
     }
+
+    @Test
+    public void getListeAllerKontenArtenLiefertListeAllerKontenArten() {
+        when(kontenArtRepository.findAll()).thenReturn(RESULT_BUILDER);
+
+        final List<KontenArt> result = service.getListeDerKontenArten();
+
+        assertThat(result, is(KONTEN_ARTEN));
+    }
+
 
     @Test
     public void legeNeuesKontoAnSpeichertDasNeueKonto() {
         final KontoAnlageAnfrage anfrage = new KontoAnlageAnfrage();
         anfrage.setKontoName(KONTO_NAME);
         anfrage.setKontoNummer(KONTO_NUMMER.toString());
-        anfrage.setKontoArt(KONTO_ART.name);
+        anfrage.setKontoArt(KONTEN_ART.name);
 
-        final Konto konto = new Konto(KONTO_NUMMER, KONTO_NAME, KONTO_ART);
+        final Konto konto = new Konto(KONTO_NUMMER, KONTO_NAME, KONTEN_ART);
 
         service.legeNeuesKontoAn(anfrage);
 
@@ -76,13 +95,13 @@ public class DefaultKontoServiceTest {
         final KontoAnlageAnfrage anfrage = new KontoAnlageAnfrage();
         anfrage.setKontoName(KONTO_NAME);
         anfrage.setKontoNummer(KONTO_NUMMER.toString());
-        anfrage.setKontoArt(KONTO_ART.name);
+        anfrage.setKontoArt(KONTEN_ART.name);
 
-        when(kontenArtRepository.findByName(KONTO_ART.name)).thenReturn(KONTO_ART);
+        when(kontenArtRepository.findByName(KONTEN_ART.name)).thenReturn(KONTEN_ART);
 
         service.legeNeuesKontoAn(anfrage);
 
-        verify(kontoRepository).save(kontoMitKontenArt(KONTO_ART));
+        verify(kontoRepository).save(kontoMitKontenArt(KONTEN_ART));
     }
 
     private static Konto kontoMitKontenArt(final KontenArt kontoArt) {

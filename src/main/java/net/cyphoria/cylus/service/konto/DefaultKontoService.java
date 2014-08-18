@@ -24,6 +24,8 @@ import net.cyphoria.cylus.domain.repositories.KontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
@@ -31,19 +33,25 @@ import org.springframework.stereotype.Service;
 public class DefaultKontoService implements KontoService {
 
     private final KontoRepository kontoRepository;
-    private final KontenArtRepository kontoArtRepository;
+    private final KontenArtRepository kontenArtRepository;
 
     @Autowired
     public DefaultKontoService(final KontoRepository kontoRepository, final KontenArtRepository kontenArtRepository) {
         this.kontoRepository = kontoRepository;
-        this.kontoArtRepository = kontenArtRepository;
+        this.kontenArtRepository = kontenArtRepository;
     }
 
     @Override
     public void legeNeuesKontoAn(final KontoAnlageAnfrage anfrage) {
-        final KontenArt kontenArt = kontoArtRepository.findByName(anfrage.getKontoArt());
+        final KontenArt kontenArt = kontenArtRepository.findByName(anfrage.getKontoArt());
         final Konto neuesKonto = new Konto(anfrage.getKontoNummer(), anfrage.getKontoName(), kontenArt);
 
         kontoRepository.save(neuesKonto);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<KontenArt> getListeDerKontenArten() {
+        return kontenArtRepository.findAll().as(List.class);
     }
 }

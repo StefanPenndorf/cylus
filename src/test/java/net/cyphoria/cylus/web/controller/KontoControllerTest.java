@@ -18,7 +18,6 @@
 package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
 import net.cyphoria.cylus.service.konto.KontoService;
 import net.cyphoria.cylus.testsupport.MockitoRule;
@@ -26,9 +25,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.data.neo4j.conversion.QueryResultBuilder;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+
+import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.hasEntry;
@@ -39,17 +39,13 @@ import static org.mockito.Mockito.when;
 
 public class KontoControllerTest {
 
-    public static final KontenArt KONTEN_ART = new KontenArt("Test");
-    public static final QueryResultBuilder<KontenArt> RESULT_BUILDER =
-            new QueryResultBuilder<>(singletonList(KONTEN_ART));
+    private static final KontenArt KONTEN_ART = new KontenArt("Test");
+    private static final List<KontenArt> KONTEN_ARTEN = singletonList(KONTEN_ART);
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
 
     private Model model = new ExtendedModelMap();
-
-    @Mock
-    private KontenArtRepository kontoArtenRepository;
 
     @Mock
     private KontoService kontoService;
@@ -58,13 +54,11 @@ public class KontoControllerTest {
 
     @Before
     public void setup() {
-        controller = new KontoController(kontoArtenRepository, kontoService);
+        controller = new KontoController(kontoService);
     }
 
     @Test
     public void getNeuesKontozeigtDasNeuTemplateAn() {
-        when(kontoArtenRepository.findAll()).thenReturn(RESULT_BUILDER);
-
         final String template = controller.neuesKonto(model);
 
         assertThat(template, is("konto/neu"));
@@ -72,7 +66,7 @@ public class KontoControllerTest {
 
     @Test
     public void getNeuesKontosetztDieKontoArtenImModell() {
-        when(kontoArtenRepository.findAll()).thenReturn(RESULT_BUILDER);
+        when(kontoService.getListeDerKontenArten()).thenReturn(KONTEN_ARTEN);
 
         controller.neuesKonto(model);
 

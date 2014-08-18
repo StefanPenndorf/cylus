@@ -18,7 +18,6 @@
 package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
 import net.cyphoria.cylus.service.konto.KontoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +40,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Transactional(readOnly =  true)
 public class KontoController {
 
-    private final KontenArtRepository kontoArtenRepository;
-
     private final KontoService kontoService;
 
     @Autowired
-    public KontoController(final KontenArtRepository kontoArtenRepository,
-                           final KontoService kontoService) {
-        this.kontoArtenRepository = kontoArtenRepository;
+    public KontoController(final KontoService kontoService) {
         this.kontoService = kontoService;
     }
 
@@ -56,7 +51,7 @@ public class KontoController {
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/neu", method = GET)
     public String neuesKonto(final Model model) {
-        final List<KontenArt> alleKontenArten = kontoArtenRepository.findAll().as(List.class);
+        final List<KontenArt> alleKontenArten = kontoService.getListeDerKontenArten();
 
         model.addAttribute("kontenArten", alleKontenArten);
 
