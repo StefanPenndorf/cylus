@@ -18,6 +18,7 @@
 package net.cyphoria.cylus.service.konto;
 
 import net.cyphoria.cylus.domain.KontenArt;
+import net.cyphoria.cylus.domain.Kontenplan;
 import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import net.cyphoria.cylus.domain.repositories.KontoRepository;
@@ -33,6 +34,7 @@ import org.springframework.data.neo4j.conversion.QueryResultBuilder;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -46,9 +48,17 @@ public class DefaultKontoServiceTest {
     private static final String KONTO_NAME = "Lebensmittel";
     private static final Integer KONTO_NUMMER = 4001;
     private static final KontenArt KONTEN_ART = new KontenArt("Aufwand");
+    private static final KontenArt KONTEN_ART2 = new KontenArt("Ertrag");
     private static final List<KontenArt> KONTEN_ARTEN = singletonList(KONTEN_ART);
     private static final QueryResultBuilder<KontenArt> RESULT_BUILDER =
             new QueryResultBuilder<>(KONTEN_ARTEN);
+    private static final List<Konto> KONTEN_LISTE = asList(
+            new Konto(4001, "Lebensmittel", KONTEN_ART),
+            new Konto(4002, "Kleidung", KONTEN_ART),
+            new Konto(5001, "Gehalt", KONTEN_ART2)
+    );
+    private static final QueryResultBuilder<Konto> ALLE_KONTEN_RESULT_BUILDER =
+            new QueryResultBuilder<>(KONTEN_LISTE);
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
@@ -103,6 +113,16 @@ public class DefaultKontoServiceTest {
 
         verify(kontoRepository).save(kontoMitKontenArt(KONTEN_ART));
     }
+
+    @Test
+    public void ladeKontenplanLaedtDenKontenplan() {
+        when(kontoRepository.findAll()).thenReturn(ALLE_KONTEN_RESULT_BUILDER);
+
+        final Kontenplan kontenplan = service.ladeKontenplan();
+
+        assertThat(kontenplan.getAlleKonten().size(), is(3));
+    }
+
 
     private static Konto kontoMitKontenArt(final KontenArt kontoArt) {
         return argThat(new TypeSafeMatcher<Konto>() {

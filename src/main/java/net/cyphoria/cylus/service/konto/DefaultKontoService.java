@@ -18,12 +18,14 @@
 package net.cyphoria.cylus.service.konto;
 
 import net.cyphoria.cylus.domain.KontenArt;
+import net.cyphoria.cylus.domain.Kontenplan;
 import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import net.cyphoria.cylus.domain.repositories.KontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -53,5 +55,13 @@ public class DefaultKontoService implements KontoService {
     @Override
     public List<KontenArt> getListeDerKontenArten() {
         return kontenArtRepository.findAll().as(List.class);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Kontenplan ladeKontenplan() {
+        final Collection<Konto> kontoIterator = kontoRepository.findAll().as(List.class);
+
+        return new Kontenplan(kontoIterator);
     }
 }

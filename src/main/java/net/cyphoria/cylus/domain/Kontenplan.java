@@ -15,23 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.web.controller;
+package net.cyphoria.cylus.domain;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-@Controller
-@RequestMapping("/kontenplan")
-public class KontenplanController {
+public class Kontenplan {
+    private final Collection<Konto> konten;
 
-    @RequestMapping
-    public String zeigeKontenplan(final Model model) {
-        return "kontenplan";
+    public Kontenplan(final Collection<Konto> kontoListe) {
+        konten = kontoListe;
     }
 
-
+    public Collection<Konto> getAlleKonten() {
+        return Collections.unmodifiableCollection(konten);
+    }
 }
