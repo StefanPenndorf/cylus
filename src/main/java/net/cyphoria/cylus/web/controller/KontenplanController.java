@@ -17,6 +17,9 @@
 
 package net.cyphoria.cylus.web.controller;
 
+import net.cyphoria.cylus.domain.Kontenplan;
+import net.cyphoria.cylus.service.konto.KontoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +31,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/kontenplan")
 public class KontenplanController {
 
+    private final KontoService kontoService;
+
+    @Autowired
+    public KontenplanController(final KontoService kontoService) {
+        this.kontoService = kontoService;
+    }
+
     @RequestMapping
     public String zeigeKontenplan(final Model model) {
+        final Kontenplan kontenplan = kontoService.ladeKontenplan();
+        model.addAttribute("kontenplan", kontenplan);
         return "kontenplan";
     }
 

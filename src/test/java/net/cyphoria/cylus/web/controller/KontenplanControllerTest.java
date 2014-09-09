@@ -34,7 +34,6 @@ import static org.mockito.Mockito.when;
 
 public class KontenplanControllerTest {
 
-    private static final Model IGNORED_MODEL = null;
     private static final Kontenplan KONTENPLAN = new Kontenplan(emptyList());
     KontenplanController controller;
 
@@ -43,17 +42,17 @@ public class KontenplanControllerTest {
 
     @Mock
     private KontoService kontoService;
-    private Model model = new ExtendedModelMap();
+    private final Model model = new ExtendedModelMap();
 
 
     @Before
     public void setup() {
-        controller = new KontenplanController();
+        controller = new KontenplanController(kontoService);
     }
 
     @Test
     public void zeigeKontenplanVerwendetKontenplanTemplate() {
-        assertThat(controller.zeigeKontenplan(IGNORED_MODEL), is("kontenplan"));
+        assertThat(controller.zeigeKontenplan(model), is("kontenplan"));
     }
 
     @Test
@@ -62,7 +61,7 @@ public class KontenplanControllerTest {
 
         controller.zeigeKontenplan(model);
 
-        assertThat("Model has", model.asMap().get("kontenplan"), is(KONTENPLAN));
+        assertThat("Model has kontenplan", model.asMap().get("kontenplan"), is(KONTENPLAN));
     }
 
 }

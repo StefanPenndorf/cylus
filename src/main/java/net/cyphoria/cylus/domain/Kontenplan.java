@@ -19,6 +19,8 @@ package net.cyphoria.cylus.domain;
 
 
 
+import org.springframework.core.style.ToStringCreator;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -34,5 +36,10 @@ public class Kontenplan {
 
     public Collection<Konto> getAlleKonten() {
         return Collections.unmodifiableCollection(konten);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringCreator(this).append("konten", konten).toString();
     }
 }

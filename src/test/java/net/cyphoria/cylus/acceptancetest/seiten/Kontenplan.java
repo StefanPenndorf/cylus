@@ -44,18 +44,18 @@ public class Kontenplan extends FluentPage {
     }
 
     public void zeigtKonto(final Integer kontoNummer, final String kontoName) {
-        final FluentWebElement kontoElem = find(".konto", withText(kontoNummer.toString())).first();
+        final FluentWebElement kontoElem = find(".konto").first();
 
         kontoElem.findFirst(".kontoNummer", withText(kontoNummer.toString()));
         kontoElem.findFirst(".kontoName", withText(kontoName));
     }
 
-    public NeuesKontoSeite legeNeuesKontoAn(
+    public void legeNeuesKontoAn(
             final Integer kontoNummer,
             final String kontoName,
             final String kontoArt) {
         final NeuesKontoSeite neuesKontoSeite = createPage(NeuesKontoSeite.class);
         goTo(neuesKontoSeite).isAt();
-        return neuesKontoSeite.legeKontoAn(kontoNummer, kontoName, kontoArt);
+        neuesKontoSeite.legeKontoAn(kontoNummer, kontoName, kontoArt);
     }
 }

@@ -77,8 +77,8 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test-mvc-htmlunit</artifactId>
-            <version>1.0.0-CYPHORIA-a</version>
+            <artifactId>spring-test-htmlunit</artifactId>
+            <version>1.0.0.CYPHORIA-B</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -46,9 +46,9 @@ abstract class AbstractSchritte extends FluentAdapter {
     @PostConstruct
     public void setup() throws IOException {
         final MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-        driver = new MockMvcHtmlUnitDriver(mockMvc, true);
-        // MockMvc will use cylus as servlet path but we don't use servlet
-        withDefaultUrl("http://localhost/cylus/");
+        driver = new MockMvcHtmlUnitDriver(mockMvc, "");
+
+        withDefaultUrl("http://localhost/");
         initFluent(driver);
         initTest();
     }

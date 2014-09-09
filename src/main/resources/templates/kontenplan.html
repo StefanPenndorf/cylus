@@ -5,6 +5,21 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <h1 id="title">Kontenplan</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Kontonummer</th>
+                <th>Kontoname</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="konto: ${kontenplan.alleKonten}" class="konto">
+                <td th:text="${konto.nummer}" class="kontoNummer">1234</td>
+                <td th:text="${konto.name}" class="kontoName">Vergn&uuml;gen</td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>
 </body>

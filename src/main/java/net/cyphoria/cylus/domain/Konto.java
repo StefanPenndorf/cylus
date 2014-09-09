@@ -85,4 +85,8 @@ public class Konto {
     public String getName() {
         return kontoName;
     }
+
+    public Integer getNummer() {
+        return kontoNummer;
+    }
 }

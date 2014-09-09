@@ -24,6 +24,7 @@ import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import net.cyphoria.cylus.domain.repositories.KontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +33,7 @@ import java.util.List;
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @Service
+@Transactional
 public class DefaultKontoService implements KontoService {
 
     private final KontoRepository kontoRepository;
