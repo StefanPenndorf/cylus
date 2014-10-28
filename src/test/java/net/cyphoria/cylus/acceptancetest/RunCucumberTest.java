@@ -25,6 +25,6 @@ import org.junit.runner.RunWith;
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(format = "pretty, junit", features = "src/test/resources/net/cyphoria/cylus/features")
+@CucumberOptions(format = {"pretty", "junit:target/junit.xml"}, features = "src/test/resources/net/cyphoria/cylus/features")
 public class RunCucumberTest {
 }
