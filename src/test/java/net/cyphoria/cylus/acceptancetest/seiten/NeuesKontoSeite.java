@@ -39,7 +39,7 @@ public class NeuesKontoSeite extends FluentPage {
     @FindBy(css = "#kontoArt")
     FluentWebElement kontoArtFeld;
 
-    @FindBy(css = "input[type=submit]")
+    @FindBy(css = "button[type=submit]")
     FluentWebElement kontoAnlegen;
 
 
