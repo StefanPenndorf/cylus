@@ -1,9 +1,4 @@
-Feature: Die Anwendung kann als Walking Skeleton gestartet werden.
-
-  Scenario: Ich kann die Anwendung starten und testen.
-    Given die Anwendung ist gestartet
-    When ich die erste Seite aufrufe
-    Then kann ich "Hello Stefan" lesen
+Feature: Die Startseite der Anwendung kann benutzt werden.
 
   Scenario: Die Homepage wird angezeigt
     Given die Anwendung ist gestartet

@@ -22,14 +22,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class HelloWorldStep extends AbstractSchritte {
+public class StartseiteSchritte extends AbstractSchritte {
 
     @Given("^die Anwendung ist gestartet$")
     public void die_Anwendung_ist_gestartet() throws Throwable {
@@ -39,11 +38,6 @@ public class HelloWorldStep extends AbstractSchritte {
     @When("^ich die erste Seite aufrufe$")
     public void ich_die_erste_Seite_aufrufe() throws Throwable {
         goTo("http://localhost/");
-    }
-
-    @Then("^kann ich \"([^\"]*)\" lesen$")
-    public void kann_ich_lesen(final String arg1) throws Throwable {
-        assertThat(pageSource(), containsString(arg1));
     }
 
     @Then("^wird der Titel \"([^\"]*)\" angezeigt$")
