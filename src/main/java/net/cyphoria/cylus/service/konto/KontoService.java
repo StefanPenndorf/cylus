@@ -20,8 +20,6 @@ package net.cyphoria.cylus.service.konto;
 import net.cyphoria.cylus.domain.KontenArt;
 import net.cyphoria.cylus.domain.Kontenplan;
 
-import java.util.List;
-
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
@@ -29,7 +27,7 @@ public interface KontoService {
 
     void legeNeuesKontoAn(KontoAnlageAnfrage anfrage);
 
-    List<KontenArt> getListeDerKontenArten();
+    Iterable<KontenArt> getListeDerKontenArten();
 
 
     Kontenplan ladeKontenplan();

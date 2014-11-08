@@ -29,7 +29,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.data.neo4j.conversion.QueryResultBuilder;
 
 import java.util.List;
 import java.util.Objects;
@@ -50,15 +49,11 @@ public class DefaultKontoServiceTest {
     private static final KontenArt KONTEN_ART = new KontenArt("Aufwand");
     private static final KontenArt KONTEN_ART2 = new KontenArt("Ertrag");
     private static final List<KontenArt> KONTEN_ARTEN = singletonList(KONTEN_ART);
-    private static final QueryResultBuilder<KontenArt> RESULT_BUILDER =
-            new QueryResultBuilder<>(KONTEN_ARTEN);
     private static final List<Konto> KONTEN_LISTE = asList(
             new Konto(4001, "Lebensmittel", KONTEN_ART),
             new Konto(4002, "Kleidung", KONTEN_ART),
             new Konto(5001, "Gehalt", KONTEN_ART2)
     );
-    private static final QueryResultBuilder<Konto> ALLE_KONTEN_RESULT_BUILDER =
-            new QueryResultBuilder<>(KONTEN_LISTE);
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
@@ -78,7 +73,7 @@ public class DefaultKontoServiceTest {
 
     @Test
     public void getListeAllerKontenArtenLiefertListeAllerKontenArten() {
-        when(kontenArtRepository.findAll()).thenReturn(RESULT_BUILDER);
+        when(kontenArtRepository.findAll()).thenReturn(KONTEN_ARTEN);
 
         final List<KontenArt> result = service.getListeDerKontenArten();
 
@@ -116,7 +111,7 @@ public class DefaultKontoServiceTest {
 
     @Test
     public void ladeKontenplanLaedtDenKontenplan() {
-        when(kontoRepository.findAll()).thenReturn(ALLE_KONTEN_RESULT_BUILDER);
+        when(kontoRepository.findAll()).thenReturn(KONTEN_LISTE);
 
         final Kontenplan kontenplan = service.ladeKontenplan();
 

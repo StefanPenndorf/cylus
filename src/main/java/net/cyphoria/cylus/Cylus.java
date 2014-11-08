@@ -17,14 +17,9 @@
 
 package net.cyphoria.cylus;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -33,16 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 @EnableTransactionManagement
 @ComponentScan
-public class Cylus {
-
-    @Autowired
-    private Environment environment;
-
-    @Bean
-    GraphDatabaseService graphDatabaseService() {
-        final String path = environment.getProperty("cylus.neo4j.db.path", "target/cylus.db");
-        return new GraphDatabaseFactory().newEmbeddedDatabase(path);
-    }
+public final class Cylus {
 
     public static void main(final String[] args) {
         SpringApplication.run(Cylus.class, args);

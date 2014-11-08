@@ -21,22 +21,28 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @NodeEntity
+@Entity
 public class KontenArt implements Serializable {
 
     private static final long serialVersionUID = 2782423484039643855L;
 
-    @GraphId private Long id;
+    @GraphId @Id @GeneratedValue(strategy = IDENTITY) private Long id;
 
     @Indexed public String name;
 
-    public KontenArt() {}
+    KontenArt() {}
 
     public KontenArt(final String name) {
         if(name == null || name.trim().isEmpty()) {

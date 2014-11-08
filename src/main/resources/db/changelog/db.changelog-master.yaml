@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+        id: 1
+        author: StefanPenndorf
+        changes:
+            - createTable:
+                tableName: konten_art
+                columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                        primaryKey: true
+                        nullable: false
+                  - column:
+                      name: name
+                      type: varchar(255)
+                      constraints:
+                        nullable: false
+
+  - changeSet:
+        id: 2
+        author: StefanPenndorf
+        changes:
+            - createTable:
+                tableName: konto
+                columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                        primaryKey: true
+                        nullable: false
+                  - column:
+                      name: konto_nummer
+                      type: int
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: konto_name
+                      type: varchar(255)
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: konten_art_id
+                      type: bigint
+                      constraints:
+                        nullable: false
+
+  - changeSet:
+        id: 3
+        author: StefanPenndorf
+        changes:
+            - addForeignKeyContraint:
+                baseColumnNames: konten_art_id
+                baseTableName: konto
+                constraintName: fk_konto_kontonArt
+                deferrable: true
+                initiallyDeferred: true
+                onDelete: CASCADE
+                referencedColumnNames: id
+                referencedTableName: konten_art

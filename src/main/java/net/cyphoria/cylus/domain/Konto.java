@@ -22,20 +22,28 @@ import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @NodeEntity
+@Entity
 public class Konto {
 
-    @GraphId private Long id;
+    @GraphId @Id @GeneratedValue(strategy = IDENTITY) private Long id;
 
     @Indexed private Integer kontoNummer;
 
     private String kontoName;
 
-
     @RelatedTo(type = "gehört zu")
+    @ManyToOne
     private KontenArt kontenArt;
 
     public Konto() { }

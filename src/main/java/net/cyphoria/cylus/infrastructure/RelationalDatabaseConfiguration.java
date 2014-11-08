@@ -15,16 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.domain.repositories;
+package net.cyphoria.cylus.infrastructure;
 
-import net.cyphoria.cylus.domain.KontenArt;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public interface KontenArtRepository extends PagingAndSortingRepository<KontenArt, Long> {
-
-    KontenArt findByName(String name);
+@Configuration
+@Profile("default")
+@EnableJpaRepositories(basePackages = "net.cyphoria.cylus.domain.repositories")
+public class RelationalDatabaseConfiguration {
 
 }

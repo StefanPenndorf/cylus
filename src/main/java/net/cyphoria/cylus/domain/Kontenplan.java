@@ -19,23 +19,23 @@ package net.cyphoria.cylus.domain;
 
 
 
+import com.google.common.collect.ImmutableSet;
 import org.springframework.core.style.ToStringCreator;
 
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 public class Kontenplan {
-    private final Collection<Konto> konten;
+    private final ImmutableSet<Konto> konten;
 
-    public Kontenplan(final Collection<Konto> kontoListe) {
-        konten = kontoListe;
+    public Kontenplan(final Iterable<Konto> kontoListe) {
+        konten = ImmutableSet.copyOf(kontoListe);
     }
 
     public Collection<Konto> getAlleKonten() {
-        return Collections.unmodifiableCollection(konten);
+        return konten;
     }
 
     @Override

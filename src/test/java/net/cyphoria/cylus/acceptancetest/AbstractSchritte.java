@@ -22,6 +22,7 @@ import net.cyphoria.cylus.Cylus;
 import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +38,7 @@ import java.io.IOException;
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @WebAppConfiguration
-@ContextConfiguration(classes = Cylus.class)
+@ContextConfiguration(classes = Cylus.class, initializers = ConfigFileApplicationContextInitializer.class)
 abstract class AbstractSchritte extends FluentAdapter {
 
     @Autowired

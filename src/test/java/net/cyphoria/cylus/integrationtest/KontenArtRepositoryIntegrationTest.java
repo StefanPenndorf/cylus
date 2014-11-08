@@ -15,12 +15,14 @@ package net.cyphoria.cylus.integrationtest;/*
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import com.google.common.collect.Lists;
 import net.cyphoria.cylus.Cylus;
 import net.cyphoria.cylus.domain.KontenArt;
 import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,7 +40,7 @@ import static org.junit.Assert.assertThat;
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @IntegrationTest
-@ContextConfiguration(classes = Cylus.class)
+@ContextConfiguration(classes = Cylus.class, initializers = ConfigFileApplicationContextInitializer.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class KontenArtRepositoryIntegrationTest {
@@ -50,7 +52,7 @@ public class KontenArtRepositoryIntegrationTest {
     @Transactional
     @SuppressWarnings("unchecked")
     public void kannAlleKontenArtenLesen() {
-        final List<KontenArt> all = repository.findAll().as(List.class);
+        final List<KontenArt> all = Lists.newArrayList(repository.findAll());
 
         assertThat(all, hasSize(5));
     }

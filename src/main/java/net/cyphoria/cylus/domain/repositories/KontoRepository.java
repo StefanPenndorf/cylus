@@ -18,10 +18,10 @@
 package net.cyphoria.cylus.domain.repositories;
 
 import net.cyphoria.cylus.domain.Konto;
-import org.springframework.data.neo4j.repository.CRUDRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public interface KontoRepository extends CRUDRepository<Konto> {
+public interface KontoRepository extends PagingAndSortingRepository<Konto, Long> {
 }

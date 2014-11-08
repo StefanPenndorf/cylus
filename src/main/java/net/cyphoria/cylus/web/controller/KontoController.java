@@ -27,8 +27,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -51,7 +49,7 @@ public class KontoController {
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/neu", method = GET)
     public String neuesKonto(final Model model) {
-        final List<KontenArt> alleKontenArten = kontoService.getListeDerKontenArten();
+        final Iterable<KontenArt> alleKontenArten = kontoService.getListeDerKontenArten();
 
         model.addAttribute("kontenArten", alleKontenArten);
 
