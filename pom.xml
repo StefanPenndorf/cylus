@@ -213,6 +213,18 @@
                             <goal>verify</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>execute-graph-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <spring.profiles.active>graph-store</spring.profiles.active>
+                                <debug>true</debug>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
                 </executions>
 
             </plugin>

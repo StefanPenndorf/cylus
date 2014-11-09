@@ -18,3 +18,19 @@ spring:
         cache: true
     datasource:
          driverClassName: org.postgresql.Driver
+
+---
+spring:
+    profiles: graph-store
+    datasource:
+        initialize: false
+    jpa:
+        hibernate:
+            ddl-auto: none
+        generate-ddl: false
+    data:
+        jpa:
+            repositories:
+                enabled: false
+liquibase:
+    enabled: false
