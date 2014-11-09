@@ -228,6 +228,29 @@
                 </executions>
 
             </plugin>
+
+            <plugin>
+                <groupId>org.cloudfoundry</groupId>
+                <artifactId>cf-maven-plugin</artifactId>
+                <version>1.0.4</version>
+                <configuration>
+                    <server>anynines</server>
+                    <target>https://api.de.a9s.eu</target>
+                    <space>test</space>
+                    <appname>cylus</appname>
+                    <org>stefan_cyphoria_net</org>
+                    <url>cylus.de.a9sapp.eu</url>
+                    <memory>512</memory>
+                    <instances>1</instances>
+                    <services>
+                        <service>
+                            <name>cylus-postgresql-db</name>
+                            <provider>postgresql</provider>
+                            <plan>Pluto-free</plan>
+                        </service>
+                    </services>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
