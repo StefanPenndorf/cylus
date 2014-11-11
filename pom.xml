@@ -270,6 +270,48 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <configuration>
+                    <checkstyleRules>
+                        <module name="Checker">
+                            <module name="FileLength">
+                                <property name="max" value="300" />
+                                <property name="fileExtensions" value="java"/>
+                            </module>
+
+                            <module name="FileTabCharacter"/>
+                            <module name="NewlineAtEndOfFile" />
+
+                            <module name="TreeWalker">
+                                <module name="EqualsHashCode" />
+                                <module name="FinalClass" />
+                                <module name="FinalLocalVariable" />
+                                <module name="FinalParameters" />
+                                <module name="NoClone" />
+                                <module name="NoFinalizer" />
+                                <module name="OneTopLevelClass" />
+                            </module>
+                        </module>
+                    </checkstyleRules>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>6.0</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals><goal>check</goal></goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <plugin>
                 <groupId>org.cloudfoundry</groupId>
                 <artifactId>cf-maven-plugin</artifactId>
                 <version>1.0.4</version>
