@@ -17,8 +17,11 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
+import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
+import com.gargoylesoftware.htmlunit.WebClient;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,9 +31,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebAppExecutingTestContext {
 
+    @Value("${security.user.name}")
+    private String login;
+
+
+    @Value("${security.user.password}")
+    private String password;
+
     @Bean
     public WebDriver webDriver() {
-        return new HtmlUnitDriver();
+        return new HtmlUnitDriver() {
+            @Override
+            protected WebClient getWebClient() {
+                final WebClient webClient = super.getWebClient();
+                final DefaultCredentialsProvider credentialsProvider = new DefaultCredentialsProvider();
+                credentialsProvider.addCredentials(login, password);
+                webClient.setCredentialsProvider(credentialsProvider);
+
+                return webClient;
+            }
+
+        };
     }
 
 }

@@ -10,6 +10,15 @@ spring:
     jpa:
         hibernate:
             ddl-auto: validate
+security:
+    user:
+      name: cylus
+      password: ${cylus.password:cylus}
+    headers:
+        xss: true
+        frame: true
+        cache: true
+        hsts: domain
 
 ---
 spring:
