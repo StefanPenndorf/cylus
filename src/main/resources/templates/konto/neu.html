@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" media="screen"
-          href="../../static/css/style.css" th:href="@{/css/style.css}"/>
-
     <title>Cylus - Neues Konto anlegen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" href="../../../../target/classes/static/css/style.css"/>
 </head>
-<body dir="ltr">
-<div class="content">
+<body>
+<nav th:replace="seiten-layout::navigation"></nav>
+<div class="container">
     <div class="row">
-        <div class="col-xs-4 col-xs-offset-2">
-            <h2>Neues Konto anlegen</h2>
-
+        <div class="col-xs-12 col-md-12">
+            <h1 id="title">Neues Konto anlegen</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
             <form method="post" action="/konto/neu" role="form">
                 <div class="form-group">
                     <label for="kontoNummer">Kontonummer*</label>
@@ -42,8 +46,8 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
+<div th:include="seiten-layout::footer"></div>
 </body>
 </html>

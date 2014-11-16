@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Kontenplan</title>
+    <title>Cylus - Kontenplan</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link th:href="@{/css/style.css}" rel="stylesheet" href="../../../../target/classes/static/css/style.css"/>
 </head>
 <body>
-<nav th:include="navigation::navigation" th:remove="tag"></nav>
+<nav th:replace="seiten-layout::navigation"></nav>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-6 col-md-offset-1">
+        <div class="col-xs-12">
             <h1 id="title">Kontenplan</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-6 col-md-offset-1">
+        <div class="col-xs-12 col-md-6">
             <table>
                 <thead>
                 <tr>
@@ -35,9 +35,7 @@
     </div>
 </div>
 
-<!-- Scripts included at the end to speed up page loading -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script th:src="@{/javascript/bootstrap.min.js}" src="../static/javascript/bootstrap.min.js"></script>
+<div th:include="seiten-layout::footer"></div>
 
 </body>
 </html>
