@@ -8,26 +8,36 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" href="../../../../target/classes/static/css/style.css"/>
 </head>
 <body>
-<nav th:include="navigation::navigation" th:remove="tag">
-
-</nav>
-<div>
-    <h1 id="title">Kontenplan</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Kontonummer</th>
-                <th>Kontoname</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="konto: ${kontenplan.alleKonten}" class="konto">
-                <td th:text="${konto.nummer}" class="kontoNummer">1234</td>
-                <td th:text="${konto.name}" class="kontoName">Vergn&uuml;gen</td>
-            </tr>
-        </tbody>
-    </table>
-
+<nav th:include="navigation::navigation" th:remove="tag"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-1">
+            <h1 id="title">Kontenplan</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-1">
+            <table>
+                <thead>
+                <tr>
+                    <th>Kontonummer</th>
+                    <th>Kontoname</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="konto: ${kontenplan.alleKonten}" class="konto">
+                    <td th:text="${konto.nummer}" class="kontoNummer">1234</td>
+                    <td th:text="${konto.name}" class="kontoName">Vergn&uuml;gen</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+<!-- Scripts included at the end to speed up page loading -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script th:src="@{/javascript/bootstrap.min.js}" src="../static/javascript/bootstrap.min.js"></script>
+
 </body>
 </html>
