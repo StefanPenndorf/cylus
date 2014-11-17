@@ -33,6 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>1.1.9.RELEASE</spring-boot.version>
         <spring-data-neo4j.version>3.2.0.RELEASE</spring-data-neo4j.version>
+        <cucumber.tags> </cucumber.tags>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -191,7 +192,7 @@
                     </includes>
                     <excludes>
                         <exclude>**/*IntegrationTest.java</exclude>
-                        <exclude>**/RunCucumberTest.java</exclude>
+                        <exclude>**/*CucumberTest.java</exclude>
                         <exclude>**/*$*</exclude>
                     </excludes>
                 </configuration>
@@ -205,6 +206,9 @@
                         <include>**/*IntegrationTest.java</include>
                         <include>**/RunCucumberTest.java</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <cucumber.options>${cucumber.tags} --plugin pretty --plugin junit:target/junit.xml --plugin json:target/cucumber.json</cucumber.options>
+                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>
@@ -222,6 +226,7 @@
                             <systemPropertyVariables>
                                 <spring.profiles.active>graph-store</spring.profiles.active>
                                 <debug>true</debug>
+                                <cucumber.options>${cucumber.tags} --plugin pretty --plugin json:target/cucumber-graph.json --plugin junit:target/junit-graph.xml</cucumber.options>
                             </systemPropertyVariables>
                         </configuration>
                     </execution>
@@ -340,7 +345,7 @@
                 <version>0.0.5</version>
                 <executions>
                     <execution>
-                        <id>execution</id>
+                        <id>cucumber-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
@@ -348,6 +353,18 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
                             <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+                            <enableFlashCharts>true</enableFlashCharts>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>cucumber-graph-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/cucumber-graph-html-reports</outputDirectory>
+                            <cucumberOutput>${project.build.directory}/cucumber-graph.json</cucumberOutput>
                             <enableFlashCharts>true</enableFlashCharts>
                         </configuration>
                     </execution>
