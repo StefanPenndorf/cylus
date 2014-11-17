@@ -36,4 +36,6 @@ public interface KontoService {
     Kontenplan ladeKontenplan();
 
     Optional<Konto> findeKontoMitKontoNummer(Integer kontoNummer);
+
+    void benenneKontoUm(final Integer kontoNummer, String neuerKontoName);
 }

@@ -28,4 +28,6 @@
     </root>
 
     <logger name="org.hibernate.SQL" level="debug" />
+    <logger name="net.cyphoria" level="debug" />
+
 </configuration>

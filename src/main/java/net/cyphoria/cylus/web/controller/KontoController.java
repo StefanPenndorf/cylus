@@ -28,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -71,6 +72,15 @@ public class KontoController {
 
         return "konto/umbenennen";
     }
+
+    @RequestMapping(value = "/umbenennen/{kontoNummer}", method = POST)
+    public String speichereNeuenNamen(
+            @PathVariable final Integer kontoNummer,
+            @RequestParam final String kontoName) {
+        kontoService.benenneKontoUm(kontoNummer, kontoName);
+        return "redirect:/kontenplan";
+    }
+
 
     @RequestMapping(value = "/neu", method = POST)
     @Transactional(readOnly = false)

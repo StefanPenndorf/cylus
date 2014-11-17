@@ -20,11 +20,9 @@ package net.cyphoria.cylus.domain.repositories;
 import net.cyphoria.cylus.domain.Konto;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.util.Optional;
-
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 public interface KontoRepository extends PagingAndSortingRepository<Konto, Long> {
-    Optional<Konto> findByKontoNummer(Integer kontoNummer);
+    Konto findByKontoNummer(Integer kontoNummer);
 }

@@ -70,7 +70,14 @@ public class DefaultKontoService implements KontoService {
 
     @Override
     public Optional<Konto> findeKontoMitKontoNummer(final Integer kontoNummer) {
-        return kontoRepository.findByKontoNummer(kontoNummer);
+        return Optional.ofNullable(kontoRepository.findByKontoNummer(kontoNummer));
+    }
+
+    @Override
+    public void benenneKontoUm(final Integer kontoNummer, final String neuerKontoName) {
+        final Konto konto = kontoRepository.findByKontoNummer(kontoNummer);
+        konto.renameTo(neuerKontoName);
+        kontoRepository.save(konto);
     }
 
 

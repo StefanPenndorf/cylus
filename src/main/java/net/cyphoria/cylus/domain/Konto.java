@@ -21,6 +21,7 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -96,5 +97,10 @@ public class Konto {
 
     public Integer getNummer() {
         return kontoNummer;
+    }
+
+    public void renameTo(final String neuerKontoName) {
+        Assert.notNull(neuerKontoName, "neuerKontoName");
+        kontoName = neuerKontoName;
     }
 }

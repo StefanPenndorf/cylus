@@ -44,9 +44,11 @@ public class KontoControllerTest {
 
     private static final KontenArt KONTEN_ART = new KontenArt("Test");
     private static final List<KontenArt> KONTEN_ARTEN = singletonList(KONTEN_ART);
-    private static final Integer IGNORED = 42;
+    private static final Integer IGNORED_NUMMER = 42;
     private static final Integer KONTO_NUMMER = 11;
     private static final Konto KONTO = new Konto(KONTO_NUMMER, "", KONTEN_ART);
+    private static final String IGNORED_NAME = "";
+    private static final String NEUER_KONTO_NAME = "Konto-Name(neu)";
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
@@ -102,9 +104,9 @@ public class KontoControllerTest {
 
     @Test
     public void getKontoUmbenennenZeigtDasUmbenennenTemplate() throws ResourceNotFoundException {
-        when(kontoService.findeKontoMitKontoNummer(IGNORED)).thenReturn(Optional.of(KONTO));
+        when(kontoService.findeKontoMitKontoNummer(IGNORED_NUMMER)).thenReturn(Optional.of(KONTO));
 
-        assertThat(controller.kontoUmbenennen(IGNORED, model), is("konto/umbenennen"));
+        assertThat(controller.kontoUmbenennen(IGNORED_NUMMER, model), is("konto/umbenennen"));
     }
 
     @Test
@@ -125,5 +127,20 @@ public class KontoControllerTest {
         controller.kontoUmbenennen(KONTO_NUMMER, model);
     }
 
+    @Test
+    public void postSpeichereNeuenNamenLeitetBeiErfolgZumKontenplan() {
+        when(kontoService.findeKontoMitKontoNummer(KONTO_NUMMER)).thenReturn(Optional.of(KONTO));
+
+        final String result = controller.speichereNeuenNamen(KONTO_NUMMER, IGNORED_NAME);
+
+        assertThat(result, is("redirect:/kontenplan"));
+    }
+
+    @Test
+    public void postSpeichereNeuenNamenÄndertDenNamenDesKontos() {
+        controller.speichereNeuenNamen(KONTO_NUMMER, NEUER_KONTO_NAME);
+
+        verify(kontoService).benenneKontoUm(KONTO_NUMMER, NEUER_KONTO_NAME);
+    }
 
 }

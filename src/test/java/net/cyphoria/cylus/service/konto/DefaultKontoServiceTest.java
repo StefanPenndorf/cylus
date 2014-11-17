@@ -28,6 +28,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class DefaultKontoServiceTest {
             new Konto(5001, "Gehalt", KONTEN_ART2)
     );
     private static final Konto KONTO = new Konto(KONTO_NUMMER, KONTO_NAME, KONTEN_ART);
+    private static final String NEUER_KONTO_NAME = "EinNeuerKontoName";
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
@@ -142,11 +144,24 @@ public class DefaultKontoServiceTest {
 
     @Test
     public void findeKontoMitKontoNummerFindetDasGesuchteKonto() {
-        when(kontoRepository.findByKontoNummer(KONTO_NUMMER)).thenReturn(Optional.of(KONTO));
+        when(kontoRepository.findByKontoNummer(KONTO_NUMMER)).thenReturn(KONTO);
 
         final Optional<Konto> konto = service.findeKontoMitKontoNummer(KONTO_NUMMER);
 
         assertThat(konto, is(Optional.of(KONTO)));
+    }
+
+    @Test
+    public void benenneKontoUmSpeichertDasKontoUnterNeuemNamen() {
+        when(kontoRepository.findByKontoNummer(KONTO_NUMMER)).thenReturn(KONTO);
+
+        service.benenneKontoUm(KONTO_NUMMER, NEUER_KONTO_NAME);
+
+        final ArgumentCaptor<Konto> captor = ArgumentCaptor.forClass(Konto.class);
+        verify(kontoRepository).save(captor.capture());
+
+        assertThat(captor.getValue(), is(KONTO));
+        assertThat(captor.getValue().getName(), is(NEUER_KONTO_NAME));
     }
 
 

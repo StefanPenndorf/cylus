@@ -51,6 +51,8 @@ public class KontenplanSchritte extends AbstractSchritte {
     public void das_Konto_wurde_im_Kontenplan_angelegt(
             final Integer kontoNummer,
             final String kontoName) throws Throwable {
+        kontoRepository.deleteAll();
+
         final KontenArt aufwand = kontenArtRepository.findByName("Aufwand");
         final Konto konto = new Konto(kontoNummer, kontoName, aufwand);
 
