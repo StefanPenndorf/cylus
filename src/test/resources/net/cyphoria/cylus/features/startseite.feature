@@ -1,7 +1,8 @@
-Feature: Die Startseite der Anwendung kann benutzt werden.
+# language: de
+Funktionalität: Die Startseite der Anwendung kann benutzt werden.
 
-  Scenario: Die Homepage wird angezeigt
-    Given die Anwendung ist gestartet
-    When  ich die erste Seite aufrufe
-    Then  wird der Titel "Cylus - Haushaltsbuch" angezeigt
-    And   wird die Überschrift "Cylus - Haushaltsbuch" angezeigt
+  Szenario: Die Homepage wird angezeigt
+    Angenommen die Anwendung ist gestartet
+    Wenn  ich die erste Seite aufrufe
+    Dann  wird der Titel "Cylus - Haushaltsbuch" angezeigt
+    Und   wird die Überschrift "Cylus - Haushaltsbuch" angezeigt

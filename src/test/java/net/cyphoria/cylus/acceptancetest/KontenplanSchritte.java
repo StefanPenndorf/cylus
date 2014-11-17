@@ -17,9 +17,9 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.de.Angenommen;
+import cucumber.api.java.de.Dann;
+import cucumber.api.java.de.Wenn;
 import net.cyphoria.cylus.acceptancetest.seiten.Kontenplan;
 import org.fluentlenium.core.annotation.Page;
 
@@ -31,19 +31,19 @@ public class KontenplanSchritte extends AbstractSchritte {
     @Page
     private Kontenplan kontenplan;
 
-    @Given("^ich habe den Kontenplan geöffnet$")
+    @Angenommen("^ich habe den Kontenplan geöffnet$")
     public void ich_habe_den_Kontenplan_geöffnet() throws Throwable {
         goTo(kontenplan).await().untilPage();
     }
 
-    @When("^ich ein neues Aufwands-Konto \"([0-9]+)\" \"([^\"]*)\" anlege$")
+    @Wenn("^ich ein neues Aufwands-Konto \"([0-9]+)\" \"([^\"]*)\" anlege$")
     public void ich_ein_neues_Aufwands_Konto_anlege(
             final Integer kontoNummer,
             final String kontoName) throws Throwable {
         kontenplan.legeNeuesKontoAn(kontoNummer, kontoName, "Aufwand");
     }
 
-    @Then("^wird das Konto \"([0-9]+)\" \"([^\"]*)\" im Kontenplan angezeigt$")
+    @Dann("^wird das Konto \"([0-9]+)\" \"([^\"]*)\" im Kontenplan angezeigt$")
     public void wird_das_Konto_im_Kontenplan_angezeigt(
             final Integer kontoNummer,
             final String kontoName) throws Throwable {

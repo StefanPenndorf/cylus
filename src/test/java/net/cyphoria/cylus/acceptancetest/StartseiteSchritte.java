@@ -17,10 +17,10 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.de.Angenommen;
+import cucumber.api.java.de.Dann;
+import cucumber.api.java.de.Und;
+import cucumber.api.java.de.Wenn;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,22 +30,22 @@ import static org.junit.Assert.assertThat;
  */
 public class StartseiteSchritte extends AbstractSchritte {
 
-    @Given("^die Anwendung ist gestartet$")
+    @Angenommen("^die Anwendung ist gestartet$")
     public void die_Anwendung_ist_gestartet() throws Throwable {
         // nichts zu tun
     }
 
-    @When("^ich die erste Seite aufrufe$")
+    @Wenn("^ich die erste Seite aufrufe$")
     public void ich_die_erste_Seite_aufrufe() throws Throwable {
         goTo("http://localhost/");
     }
 
-    @Then("^wird der Titel \"([^\"]*)\" angezeigt$")
+    @Dann("^wird der Titel \"([^\"]*)\" angezeigt$")
     public void wird_der_Titel_angezeigt(final String titel) throws Throwable {
         assertThat(title(), is(titel));
     }
 
-    @And("^wird die Überschrift \"([^\"]*)\" angezeigt$")
+    @Und("^wird die Überschrift \"([^\"]*)\" angezeigt$")
     public void wird_die_Überschrift_angezeigt(final String ueberschrift) throws Throwable {
         assertThat(findFirst("h1#title").getText(), is(ueberschrift));
     }
