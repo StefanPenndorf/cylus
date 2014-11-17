@@ -18,6 +18,7 @@
 package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
+import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
 import net.cyphoria.cylus.service.konto.KontoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -54,6 +56,20 @@ public class KontoController {
         model.addAttribute("kontenArten", alleKontenArten);
 
         return "konto/neu";
+    }
+
+    @RequestMapping(value = "/umbenennen/{kontoNummer}", method = GET)
+    public String kontoUmbenennen(
+            @PathVariable final Integer kontoNummer,
+                          final Model model) throws ResourceNotFoundException {
+
+        final Konto konto = kontoService
+                .findeKontoMitKontoNummer(kontoNummer)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        model.addAttribute("konto", konto);
+
+        return "konto/umbenennen";
     }
 
     @RequestMapping(value = "/neu", method = POST)

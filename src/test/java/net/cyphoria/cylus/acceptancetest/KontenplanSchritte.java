@@ -21,7 +21,12 @@ import cucumber.api.java.de.Angenommen;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Wenn;
 import net.cyphoria.cylus.acceptancetest.seiten.Kontenplan;
+import net.cyphoria.cylus.domain.KontenArt;
+import net.cyphoria.cylus.domain.Konto;
+import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
+import net.cyphoria.cylus.domain.repositories.KontoRepository;
 import org.fluentlenium.core.annotation.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
@@ -31,9 +36,25 @@ public class KontenplanSchritte extends AbstractSchritte {
     @Page
     private Kontenplan kontenplan;
 
+    @Autowired
+    private KontoRepository kontoRepository;
+
+    @Autowired
+    private KontenArtRepository kontenArtRepository;
+
     @Angenommen("^ich habe den Kontenplan geöffnet$")
     public void ich_habe_den_Kontenplan_geöffnet() throws Throwable {
         goTo(kontenplan).await().untilPage();
+    }
+
+    @Angenommen("^das Konto \"([^\"]*)\" \"([^\"]*)\" wurde im Kontenplan angelegt$")
+    public void das_Konto_wurde_im_Kontenplan_angelegt(
+            final Integer kontoNummer,
+            final String kontoName) throws Throwable {
+        final KontenArt aufwand = kontenArtRepository.findByName("Aufwand");
+        final Konto konto = new Konto(kontoNummer, kontoName, aufwand);
+
+        kontoRepository.save(konto);
     }
 
     @Wenn("^ich ein neues Aufwands-Konto \"([0-9]+)\" \"([^\"]*)\" anlege$")
@@ -41,6 +62,13 @@ public class KontenplanSchritte extends AbstractSchritte {
             final Integer kontoNummer,
             final String kontoName) throws Throwable {
         kontenplan.legeNeuesKontoAn(kontoNummer, kontoName, "Aufwand");
+    }
+
+    @Wenn("^ich das Konto \"([^\"]*)\" in \"([^\"]*)\" umbenenne$")
+    public void ich_das_Konto_in_umbenenne(
+            final Integer kontoNummer,
+            final String neuerKontoName) throws Throwable {
+        kontenplan.benenneKontoUm(kontoNummer, neuerKontoName);
     }
 
     @Dann("^wird das Konto \"([0-9]+)\" \"([^\"]*)\" im Kontenplan angezeigt$")

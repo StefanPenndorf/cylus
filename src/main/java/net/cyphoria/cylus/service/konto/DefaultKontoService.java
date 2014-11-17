@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
@@ -66,4 +67,11 @@ public class DefaultKontoService implements KontoService {
 
         return new Kontenplan(kontoIterator);
     }
+
+    @Override
+    public Optional<Konto> findeKontoMitKontoNummer(final Integer kontoNummer) {
+        return kontoRepository.findByKontoNummer(kontoNummer);
+    }
+
+
 }

@@ -18,17 +18,20 @@
 package net.cyphoria.cylus.web.controller;
 
 import net.cyphoria.cylus.domain.KontenArt;
+import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
 import net.cyphoria.cylus.service.konto.KontoService;
 import net.cyphoria.cylus.testsupport.MockitoRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.hasEntry;
@@ -41,11 +44,17 @@ public class KontoControllerTest {
 
     private static final KontenArt KONTEN_ART = new KontenArt("Test");
     private static final List<KontenArt> KONTEN_ARTEN = singletonList(KONTEN_ART);
+    private static final Integer IGNORED = 42;
+    private static final Integer KONTO_NUMMER = 11;
+    private static final Konto KONTO = new Konto(KONTO_NUMMER, "", KONTEN_ART);
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
 
-    private Model model = new ExtendedModelMap();
+    @Rule
+    public final ExpectedException expectedException = ExpectedException.none();
+
+    private final Model model = new ExtendedModelMap();
 
     @Mock
     private KontoService kontoService;
@@ -89,6 +98,31 @@ public class KontoControllerTest {
         final String result = controller.speichereNeuesKonto(anfrage);
 
         assertThat(result, is("redirect:/kontenplan"));
+    }
+
+    @Test
+    public void getKontoUmbenennenZeigtDasUmbenennenTemplate() throws ResourceNotFoundException {
+        when(kontoService.findeKontoMitKontoNummer(IGNORED)).thenReturn(Optional.of(KONTO));
+
+        assertThat(controller.kontoUmbenennen(IGNORED, model), is("konto/umbenennen"));
+    }
+
+    @Test
+    public void getKontoUmbenennenZeigtDasAktuelleKontoAn() throws ResourceNotFoundException {
+        when(kontoService.findeKontoMitKontoNummer(KONTO_NUMMER)).thenReturn(Optional.of(KONTO));
+
+        controller.kontoUmbenennen(KONTO_NUMMER, model);
+
+        assertThat(model.asMap(), hasEntry("konto", KONTO));
+    }
+
+    @Test
+    public void getKontoUmbenennenWirftResourceNotFoundWennKontoNichtExistiert() throws ResourceNotFoundException {
+        expectedException.expect(ResourceNotFoundException.class);
+
+        when(kontoService.findeKontoMitKontoNummer(KONTO_NUMMER)).thenReturn(Optional.empty());
+
+        controller.kontoUmbenennen(KONTO_NUMMER, model);
     }
 
 

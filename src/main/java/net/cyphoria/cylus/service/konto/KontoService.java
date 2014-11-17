@@ -19,6 +19,9 @@ package net.cyphoria.cylus.service.konto;
 
 import net.cyphoria.cylus.domain.KontenArt;
 import net.cyphoria.cylus.domain.Kontenplan;
+import net.cyphoria.cylus.domain.Konto;
+
+import java.util.Optional;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
@@ -31,4 +34,6 @@ public interface KontoService {
 
 
     Kontenplan ladeKontenplan();
+
+    Optional<Konto> findeKontoMitKontoNummer(Integer kontoNummer);
 }

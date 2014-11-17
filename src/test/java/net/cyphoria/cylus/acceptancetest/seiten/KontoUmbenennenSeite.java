@@ -19,46 +19,53 @@ package net.cyphoria.cylus.acceptancetest.seiten;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Optional;
+
+import static java.util.Optional.empty;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public class NeuesKontoSeite extends FluentPage {
+public class KontoUmbenennenSeite extends FluentPage {
 
-    @FindBy(css = "#kontoNummer")
-    FluentWebElement kontoNummerFeld;
-
+    private Optional<Integer> kontoNummer = empty();
 
     @FindBy(css = "#kontoName")
     FluentWebElement kontoNameFeld;
 
-    @FindBy(css = "#kontoArt")
-    FluentWebElement kontoArtFeld;
-
     @FindBy(css = "button[type=submit]")
-    FluentWebElement kontoAnlegen;
-
+    FluentWebElement kontoUmbenennen;
 
     @Override
     public String getUrl() {
-        return "/konto/neu";
-    }
-
-
-    public void legeKontoAn(final Integer kontoNummer, final String kontoName, final String kontoArt) {
-        isAt();
-        kontoNummerFeld.fill().with(kontoNummer.toString());
-        kontoNameFeld.fill().with(kontoName);
-        kontoArtFeld.fill().fillSelect("select").withText(kontoArt);
-        kontoAnlegen.click();
+        return kontoNummer.map(k -> "/konto/umbenennen/" + k).get();
     }
 
     @Override
     public void isAt() {
-        assertThat(title(), containsString("Neues Konto anlegen"));
+        assertThat(kontoNummer, is(not(empty())));
+        assertThat(title(), Matchers.allOf(
+                containsString("Konto"),
+                containsString(kontoNummer.get().toString()),
+                containsString("umbenennen")
+        ));
+    }
+
+    public KontoUmbenennenSeite goTo(final Integer kontoNr) {
+        kontoNummer = Optional.of(kontoNr);
+        go();
+        return this;
+    }
+
+    public void benenneKontoUmIn(final String neuerKontoName) {
+        kontoNameFeld.fill().with(neuerKontoName);
+        kontoUmbenennen.submit();
     }
 }

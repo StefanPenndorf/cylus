@@ -15,16 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.domain.repositories;
+package net.cyphoria.cylus.web.controller;
 
-import net.cyphoria.cylus.domain.Konto;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.Optional;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-public interface KontoRepository extends PagingAndSortingRepository<Konto, Long> {
-    Optional<Konto> findByKontoNummer(Integer kontoNummer);
+@ResponseStatus(NOT_FOUND)
+public class ResourceNotFoundException extends Exception {
+
+    private static final long serialVersionUID = -1504063753979889655L;
+
 }

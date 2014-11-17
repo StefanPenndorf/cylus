@@ -32,6 +32,7 @@ import org.mockito.Mock;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -54,6 +55,7 @@ public class DefaultKontoServiceTest {
             new Konto(4002, "Kleidung", KONTEN_ART),
             new Konto(5001, "Gehalt", KONTEN_ART2)
     );
+    private static final Konto KONTO = new Konto(KONTO_NUMMER, KONTO_NAME, KONTEN_ART);
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
@@ -137,5 +139,15 @@ public class DefaultKontoServiceTest {
             }
         });
     }
+
+    @Test
+    public void findeKontoMitKontoNummerFindetDasGesuchteKonto() {
+        when(kontoRepository.findByKontoNummer(KONTO_NUMMER)).thenReturn(Optional.of(KONTO));
+
+        final Optional<Konto> konto = service.findeKontoMitKontoNummer(KONTO_NUMMER);
+
+        assertThat(konto, is(Optional.of(KONTO)));
+    }
+
 
 }

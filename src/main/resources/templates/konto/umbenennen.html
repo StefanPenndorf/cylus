@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) Stefan Penndorf 2014
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="|Cylus - Konto ${konto.nummer} umbenennen|">Cylus - Konto 4201 umbenennen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" href="../../../../target/classes/static/css/style.css"/>
+</head>
+<body>
+<nav th:replace="seiten-layout::navigation"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h1 id="title">Konto <span th:text="${konto.nummer}">4201</span> umbenennen</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <form th:action="@{|/konto/umbenennen/${konto.nummer}|}" method="post" action="/konto/umbenennen/" role="form">
+                <div class="form-group">
+                    <label for="kontoName">Neuer Kontoname*</label>
+                    <input name="kontoName" id="kontoName" type="text" size="30" maxlength="50" tabindex="1"
+                           class="form-control" th:placeholder="${konto.name}" placeholder="Lebensmittel"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" tabindex="2" class="btn btn-primary">Konto umbenennen</button>
+                    <a href="/kontenplan" class="btn btn-default pull-right">Abbrechen</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:include="seiten-layout::footer"></div>
+</body>
+</html>

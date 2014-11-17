@@ -58,4 +58,11 @@ public class Kontenplan extends FluentPage {
         goTo(neuesKontoSeite).isAt();
         neuesKontoSeite.legeKontoAn(kontoNummer, kontoName, kontoArt);
     }
+
+    public void benenneKontoUm(final Integer kontoNummer, final String neuerKontoName) {
+        final KontoUmbenennenSeite kontoUmbenennenSeite = createPage(KontoUmbenennenSeite.class);
+
+        kontoUmbenennenSeite.goTo(kontoNummer).isAt();
+        kontoUmbenennenSeite.benenneKontoUmIn(neuerKontoName);
+    }
 }
