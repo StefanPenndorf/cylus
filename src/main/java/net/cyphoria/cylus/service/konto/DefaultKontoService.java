@@ -34,7 +34,7 @@ import java.util.Optional;
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class DefaultKontoService implements KontoService {
 
     private final KontoRepository kontoRepository;
@@ -46,6 +46,7 @@ public class DefaultKontoService implements KontoService {
         this.kontenArtRepository = kontenArtRepository;
     }
 
+    @Transactional(readOnly = false)
     @Override
     public void legeNeuesKontoAn(final KontoAnlageAnfrage anfrage) {
         final KontenArt kontenArt = kontenArtRepository.findByName(anfrage.getKontoArt());
@@ -73,6 +74,7 @@ public class DefaultKontoService implements KontoService {
         return Optional.ofNullable(kontoRepository.findByKontoNummer(kontoNummer));
     }
 
+    @Transactional(readOnly = false)
     @Override
     public void benenneKontoUm(final Integer kontoNummer, final String neuerKontoName) {
         final Konto konto = kontoRepository.findByKontoNummer(kontoNummer);

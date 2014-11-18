@@ -23,7 +23,6 @@ import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
 import net.cyphoria.cylus.service.konto.KontoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +37,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 @Controller
 @RequestMapping("/konto")
-@Transactional(readOnly =  true)
 public class KontoController {
 
     private final KontoService kontoService;
@@ -83,7 +81,6 @@ public class KontoController {
 
 
     @RequestMapping(value = "/neu", method = POST)
-    @Transactional(readOnly = false)
     public String speichereNeuesKonto(@ModelAttribute final KontoAnlageAnfrage anfrage) {
         kontoService.legeNeuesKontoAn(anfrage);
         return "redirect:/kontenplan";
