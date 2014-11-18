@@ -17,56 +17,37 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import net.cyphoria.cylus.Cylus;
 import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.htmlunit.MockMvcWebConnection;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.io.IOException;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @WebAppConfiguration
-@ContextConfiguration(classes = Cylus.class, initializers = ConfigFileApplicationContextInitializer.class)
+@ContextHierarchy({
+        @ContextConfiguration(
+                classes = Cylus.class,
+                initializers = ConfigFileApplicationContextInitializer.class),
+        @ContextConfiguration(classes = WebAppExecutingTestContext.class)
+})
 abstract class AbstractSchritte extends FluentAdapter {
 
     @Autowired
-    private WebApplicationContext context;
-
     private HtmlUnitDriver driver;
 
     @PostConstruct
     public void setup() throws IOException {
-        final MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-        driver = new HtmlUnitDriver() {
-            @Override
-            protected WebClient modifyWebClient(final WebClient client) {
-                final WebClient webClient = super.modifyWebClient(client);
-                webClient.setWebConnection(new MockMvcWebConnection(mockMvc, ""));
-                return webClient;
-            }
-        };
         withDefaultUrl("http://localhost/");
         initFluent(driver);
         initTest();
     }
-
-    @PreDestroy
-    public void destroy() {
-        if(driver != null) {
-            driver.close();
-        }
-    }
-
 }
