@@ -58,14 +58,13 @@ public class KontoUmbenennenSeite extends FluentPage {
         ));
     }
 
-    public KontoUmbenennenSeite goTo(final Integer kontoNr) {
-        kontoNummer = Optional.of(kontoNr);
-        go();
-        return this;
-    }
-
     public void benenneKontoUmIn(final String neuerKontoName) {
         kontoNameFeld.fill().with(neuerKontoName);
         kontoUmbenennen.submit();
+    }
+
+    public KontoUmbenennenSeite für(final Integer kontoNr) {
+        kontoNummer = Optional.of(kontoNr);
+        return this;
     }
 }

@@ -11,23 +11,34 @@
 <nav th:replace="seiten-layout::navigation"></nav>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-6">
             <h1 id="title">Kontenplan</h1>
+            <a id="neuesKontoAnlegen"  th:href="@{/konto/neu}" href="/konto/neu"
+               class="btn-add pull-right">
+                <span aria-hidden="true"></span> Neues Konto
+            </a>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-6">
-            <table>
+            <table class="table">
                 <thead>
                 <tr>
                     <th>Kontonummer</th>
                     <th>Kontoname</th>
+                    <th><span class="sr-only">Aktionen</span></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="konto: ${kontenplan.alleKonten}" class="konto">
                     <td th:text="${konto.nummer}" class="kontoNummer">1234</td>
                     <td th:text="${konto.name}" class="kontoName">Vergn&uuml;gen</td>
+                    <td>
+                        <a th:href="@{|/konto/umbenennen/${konto.nummer}|}" href="/konto/umbenennen/42"
+                           class="btn-rename">
+                            <span></span><span class="sr-only">Konto umbenennen</span>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

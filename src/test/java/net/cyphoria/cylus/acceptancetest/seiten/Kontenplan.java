@@ -19,6 +19,7 @@ package net.cyphoria.cylus.acceptancetest.seiten;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.support.FindBy;
 
 import static org.fluentlenium.core.filter.FilterConstructor.withText;
 import static org.hamcrest.Matchers.containsString;
@@ -30,7 +31,8 @@ import static org.junit.Assert.assertThat;
  */
 public class Kontenplan extends FluentPage {
 
-
+    @FindBy(css = "#neuesKontoAnlegen")
+    FluentWebElement neuesKontoAnlegenButton;
 
     @Override
     public String getUrl() {
@@ -54,15 +56,24 @@ public class Kontenplan extends FluentPage {
             final Integer kontoNummer,
             final String kontoName,
             final String kontoArt) {
+
+        neuesKontoAnlegenButton.click();
+
         final NeuesKontoSeite neuesKontoSeite = createPage(NeuesKontoSeite.class);
-        goTo(neuesKontoSeite).isAt();
+        neuesKontoSeite.isAt();
         neuesKontoSeite.legeKontoAn(kontoNummer, kontoName, kontoArt);
     }
 
     public void benenneKontoUm(final Integer kontoNummer, final String neuerKontoName) {
+        final FluentWebElement kontoElem =
+                find(".konto", withText().contains(kontoNummer.toString()))
+                .first();
+
+        kontoElem.findFirst(".btn-rename").click();
+
         final KontoUmbenennenSeite kontoUmbenennenSeite = createPage(KontoUmbenennenSeite.class);
 
-        kontoUmbenennenSeite.goTo(kontoNummer).isAt();
+        kontoUmbenennenSeite.für(kontoNummer).isAt();
         kontoUmbenennenSeite.benenneKontoUmIn(neuerKontoName);
     }
 }

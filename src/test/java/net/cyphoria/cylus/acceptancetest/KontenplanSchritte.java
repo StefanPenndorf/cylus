@@ -26,6 +26,7 @@ import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.domain.repositories.KontenArtRepository;
 import net.cyphoria.cylus.domain.repositories.KontoRepository;
 import org.fluentlenium.core.annotation.Page;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -57,6 +58,8 @@ public class KontenplanSchritte extends AbstractSchritte {
         final Konto konto = new Konto(kontoNummer, kontoName, aufwand);
 
         kontoRepository.save(konto);
+
+        goTo(kontenplan).await().untilPage();
     }
 
     @Wenn("^ich ein neues Aufwands-Konto \"([0-9]+)\" \"([^\"]*)\" anlege$")
@@ -77,6 +80,7 @@ public class KontenplanSchritte extends AbstractSchritte {
     public void wird_das_Konto_im_Kontenplan_angezeigt(
             final Integer kontoNummer,
             final String kontoName) throws Throwable {
+        LoggerFactory.getLogger(getClass()).error(pageSource());
         kontenplan.zeigtKonto(kontoNummer, kontoName);
     }
 }
