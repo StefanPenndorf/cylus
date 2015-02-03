@@ -27,6 +27,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -39,15 +43,20 @@ public class Konto {
 
     @GraphId @Id @GeneratedValue(strategy = IDENTITY) private Long id;
 
+    @NotNull
+    @Min(1000) @Max(9999)
     @Indexed private Integer kontoNummer;
 
+    @NotNull
+    @Size(min = 3, max = 50, message = "{Konto.kontoName.zu-kurz}")
     private String kontoName;
 
+    @NotNull
     @RelatedTo(type = "gehört zu")
     @ManyToOne
     private KontenArt kontenArt;
 
-    public Konto() { }
+    Konto() { }
 
     public Konto(final Integer kontoNummer, final String kontoName, final KontenArt kontenArt) {
         this.kontoNummer = kontoNummer;

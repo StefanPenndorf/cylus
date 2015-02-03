@@ -30,6 +30,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.springframework.validation.BindException;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,6 +59,7 @@ public class DefaultKontoServiceTest {
     );
     private static final Konto KONTO = new Konto(KONTO_NUMMER, KONTO_NAME, KONTEN_ART);
     private static final String NEUER_KONTO_NAME = "EinNeuerKontoName";
+    private static final Konto KONTO_MIT_NEUEM_NAMEN = new Konto(KONTO_NUMMER, NEUER_KONTO_NAME, KONTEN_ART);
 
     @Rule
     public final MockitoRule mockito = new MockitoRule();
@@ -152,10 +154,10 @@ public class DefaultKontoServiceTest {
     }
 
     @Test
-    public void benenneKontoUmSpeichertDasKontoUnterNeuemNamen() {
+    public void benenneKontoUmSpeichertDasKontoUnterNeuemNamen() throws BindException {
         when(kontoRepository.findByKontoNummer(KONTO_NUMMER)).thenReturn(KONTO);
 
-        service.benenneKontoUm(KONTO_NUMMER, NEUER_KONTO_NAME);
+        service.benenneKontoUm(KONTO_MIT_NEUEM_NAMEN);
 
         final ArgumentCaptor<Konto> captor = ArgumentCaptor.forClass(Konto.class);
         verify(kontoRepository).save(captor.capture());
@@ -163,6 +165,7 @@ public class DefaultKontoServiceTest {
         assertThat(captor.getValue(), is(KONTO));
         assertThat(captor.getValue().getName(), is(NEUER_KONTO_NAME));
     }
+
 
 
 }

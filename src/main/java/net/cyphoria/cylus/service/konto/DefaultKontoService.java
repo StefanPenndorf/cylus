@@ -76,9 +76,10 @@ public class DefaultKontoService implements KontoService {
 
     @Transactional(readOnly = false)
     @Override
-    public void benenneKontoUm(final Integer kontoNummer, final String neuerKontoName) {
-        final Konto konto = kontoRepository.findByKontoNummer(kontoNummer);
-        konto.renameTo(neuerKontoName);
+    public void benenneKontoUm(final Konto anfrage) {
+        final Konto konto = kontoRepository.findByKontoNummer(anfrage.getNummer());
+        konto.renameTo(anfrage.getName());
+
         kontoRepository.save(konto);
     }
 

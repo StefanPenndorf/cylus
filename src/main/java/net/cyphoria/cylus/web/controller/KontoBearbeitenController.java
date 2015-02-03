@@ -17,14 +17,19 @@
 
 package net.cyphoria.cylus.web.controller;
 
-import net.cyphoria.cylus.domain.KontenArt;
-import net.cyphoria.cylus.service.konto.KontoAnlageAnfrage;
+import net.cyphoria.cylus.domain.Konto;
 import net.cyphoria.cylus.service.konto.KontoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -33,30 +38,43 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @Controller
-@RequestMapping("/konto")
-public class KontoController {
+@RequestMapping("/konto/umbenennen")
+public class KontoBearbeitenController {
 
     private final KontoService kontoService;
 
     @Autowired
-    public KontoController(final KontoService kontoService) {
+    public KontoBearbeitenController(final KontoService kontoService) {
         this.kontoService = kontoService;
     }
 
-    @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/neu", method = GET)
-    public String neuesKonto(final Model model) {
-        final Iterable<KontenArt> alleKontenArten = kontoService.getListeDerKontenArten();
-
-        model.addAttribute("kontenArten", alleKontenArten);
-
-        return "konto/neu";
+    @InitBinder
+    private void initBinder(final WebDataBinder binder) {
+        binder.initDirectFieldAccess();
     }
 
+    @ModelAttribute
+    public Konto getKonto(@PathVariable("kontoNummer") final Integer kontoNummer) throws ResourceNotFoundException {
+        return kontoService
+                .findeKontoMitKontoNummer(kontoNummer)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
 
-    @RequestMapping(value = "/neu", method = POST)
-    public String speichereNeuesKonto(@ModelAttribute final KontoAnlageAnfrage anfrage) {
-        kontoService.legeNeuesKontoAn(anfrage);
+    @RequestMapping(value = "/{kontoNummer}", method = GET)
+    public String kontoUmbenennen() {
+        return "konto/umbenennen";
+    }
+
+    @RequestMapping(value = "/{kontoNummer}", method = POST)
+    public String speichereNeuenNamen(
+            @ModelAttribute @Valid final Konto konto,
+            final BindingResult bindingResult) throws BindException {
+        if (bindingResult.hasErrors()) {
+            return "konto/umbenennen";
+        }
+
+        kontoService.benenneKontoUm(konto);
         return "redirect:/kontenplan";
     }
+
 }

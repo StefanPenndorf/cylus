@@ -33,8 +33,9 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-4">
-            <form th:action="@{|/konto/umbenennen/${konto.nummer}|}" method="post" action="/konto/umbenennen/" role="form">
+            <form th:action="@{|/konto/umbenennen/${konto.nummer}|}" th:object="${konto}" method="post" action="/konto/umbenennen/" role="form">
                 <div class="form-group">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('kontoName')}" th:errors="*{kontoName}">Name error</div>
                     <label for="kontoName">Neuer Kontoname*</label>
                     <input name="kontoName" id="kontoName" type="text" size="30" maxlength="50" tabindex="1"
                            class="form-control" th:placeholder="${konto.name}" placeholder="Lebensmittel"/>
