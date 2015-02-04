@@ -32,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>1.1.9.RELEASE</spring-boot.version>
-        <spring-data-neo4j.version>3.2.0.RELEASE</spring-data-neo4j.version>
+        <spring-data-neo4j.version>3.2.2.RELEASE</spring-data-neo4j.version>
         <cucumber.tags> </cucumber.tags>
     </properties>
     <dependencyManagement>
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.3.0</version>
+            <version>3.3.2</version>
         </dependency>
 
 
@@ -106,14 +106,14 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-spring</artifactId>
-            <version>1.1.8</version>
+            <version>1.2.2</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -127,7 +127,7 @@
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
-            <version>0.10.2</version>
+            <version>0.10.3</version>
             <scope>test</scope>
         </dependency>
 
