@@ -33,8 +33,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>1.1.9.RELEASE</spring-boot.version>
         <spring-data-neo4j.version>3.2.2.RELEASE</spring-data-neo4j.version>
-        <cucumber.tags> </cucumber.tags>
+        <cucumber.tags></cucumber.tags>
     </properties>
+    <prerequisites>
+        <maven>3.0.2</maven>
+    </prerequisites>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -143,8 +147,13 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.2</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -185,7 +194,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.17</version>
+                <version>2.18.1</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
@@ -200,14 +209,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.17</version>
+                <version>2.18.1</version>
                 <configuration>
                     <includes>
                         <include>**/*IntegrationTest.java</include>
                         <include>**/RunCucumberTest.java</include>
                     </includes>
                     <systemPropertyVariables>
-                        <cucumber.options>${cucumber.tags} --plugin pretty --plugin junit:target/junit.xml --plugin json:target/cucumber.json</cucumber.options>
+                        <cucumber.options>${cucumber.tags} --plugin pretty --plugin junit:target/junit.xml --plugin
+                            json:target/cucumber.json
+                        </cucumber.options>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>
@@ -226,7 +237,9 @@
                             <systemPropertyVariables>
                                 <spring.profiles.active>graph-store</spring.profiles.active>
                                 <debug>true</debug>
-                                <cucumber.options>${cucumber.tags} --plugin pretty --plugin json:target/cucumber-graph.json --plugin junit:target/junit-graph.xml</cucumber.options>
+                                <cucumber.options>${cucumber.tags} --plugin pretty --plugin
+                                    json:target/cucumber-graph.json --plugin junit:target/junit-graph.xml
+                                </cucumber.options>
                             </systemPropertyVariables>
                         </configuration>
                     </execution>
@@ -282,21 +295,21 @@
                     <checkstyleRules>
                         <module name="Checker">
                             <module name="FileLength">
-                                <property name="max" value="300" />
+                                <property name="max" value="300"/>
                                 <property name="fileExtensions" value="java"/>
                             </module>
 
                             <module name="FileTabCharacter"/>
-                            <module name="NewlineAtEndOfFile" />
+                            <module name="NewlineAtEndOfFile"/>
 
                             <module name="TreeWalker">
-                                <module name="EqualsHashCode" />
-                                <module name="FinalClass" />
-                                <module name="FinalLocalVariable" />
-                                <module name="FinalParameters" />
-                                <module name="NoClone" />
-                                <module name="NoFinalizer" />
-                                <module name="OneTopLevelClass" />
+                                <module name="EqualsHashCode"/>
+                                <module name="FinalClass"/>
+                                <module name="FinalLocalVariable"/>
+                                <module name="FinalParameters"/>
+                                <module name="NoClone"/>
+                                <module name="NoFinalizer"/>
+                                <module name="OneTopLevelClass"/>
                             </module>
                         </module>
                     </checkstyleRules>
@@ -310,7 +323,9 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <goals><goal>check</goal></goals>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
 
@@ -319,7 +334,7 @@
             <plugin>
                 <groupId>org.cloudfoundry</groupId>
                 <artifactId>cf-maven-plugin</artifactId>
-                <version>1.0.4</version>
+                <version>1.1.0</version>
                 <configuration>
                     <server>anynines</server>
                     <target>https://api.de.a9s.eu</target>
@@ -342,7 +357,7 @@
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>0.0.5</version>
+                <version>0.0.6</version>
                 <executions>
                     <execution>
                         <id>cucumber-report</id>
