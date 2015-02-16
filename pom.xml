@@ -346,11 +346,13 @@
                     <url>cylus.de.a9sapp.eu</url>
                     <memory>512</memory>
                     <instances>1</instances>
+                    <buildpack>https://github.com/cloudfoundry/java-buildpack.git</buildpack>
                     <services>
                         <service>
                             <name>cylus-postgresql-db</name>
                             <provider>postgresql</provider>
                             <plan>Pluto-free</plan>
+                            <label>cylus-db</label>
                         </service>
                     </services>
                 </configuration>
