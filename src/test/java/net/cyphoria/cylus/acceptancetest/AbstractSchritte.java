@@ -19,34 +19,45 @@ package net.cyphoria.cylus.acceptancetest;
 
 import net.cyphoria.cylus.Cylus;
 import org.fluentlenium.core.FluentAdapter;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 /**
+ * Basisklasse für Cucumber Schritte, die auch dafür sorgt, dass die Anwendung hochgefahren wird und
+ * bereitgestellt wird.
+ *
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
-@WebAppConfiguration
-@ContextHierarchy({
-        @ContextConfiguration(
-                classes = Cylus.class,
-                initializers = ConfigFileApplicationContextInitializer.class),
-        @ContextConfiguration(classes = WebAppExecutingTestContext.class)
-})
+@ContextConfiguration(
+        classes = {Cylus.class, WebAppExecutingTestContext.class},
+        initializers = ConfigFileApplicationContextInitializer.class,
+        loader = SpringApplicationContextLoader.class
+)
+@WebIntegrationTest("server.port=0")
+@RunWith(SpringJUnit4ClassRunner.class)
 abstract class AbstractSchritte extends FluentAdapter {
 
     @Autowired
     private HtmlUnitDriver driver;
 
+    @Autowired
+    Environment environment;
+
     @PostConstruct
     public void setup() throws IOException {
-        withDefaultUrl("http://localhost/");
+        final String port = environment.getRequiredProperty("local.server.port");
+
+        withDefaultUrl("http://localhost:" + port + '/');
         initFluent(driver);
         initTest();
     }

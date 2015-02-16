@@ -19,26 +19,33 @@ package net.cyphoria.cylus.infrastructure;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.Environment;
 
 /**
+ * Konfiguration für eine Neo4j Graph-Datenbank statt einer relationalen Datenbank.
+ *
+ * Benutzt aktuell eine statische DB zum Testen - das ist aktuell (nur) ein Hack damit
+ * das Refreshen des Application Contexts bei den Akzeptanztests nicht zu Lock-Problemen
+ * führt.
+ * Kann zum schnellen Ausprobieren der Anwendung mit Graph-DB genutzt werden, ist aber so
+ * nicht für den produktiven Einsatz geeignet (da sollte die Graph-DB sowieso von außen
+ * bereitgestellt werden.
+ *
  * @author Stefan Pennndorf <stefan@cyphoria.net>
  */
 @Profile("graph-store")
 @Configuration
 public class GraphDatabaseConfiguration {
 
-    @Autowired
-    private Environment environment;
+    private static final String DATABASE_PATH = "target/cylus.db";
+
+    private static final GraphDatabaseService GRAPH_DATABASE_SERVICE = new GraphDatabaseFactory().newEmbeddedDatabase(DATABASE_PATH);
 
     @Bean
     GraphDatabaseService graphDatabaseService() {
-        final String path = environment.getProperty("cylus.neo4j.db.path", "target/cylus.db");
-        return new GraphDatabaseFactory().newEmbeddedDatabase(path);
+        return GRAPH_DATABASE_SERVICE;
     }
 
 

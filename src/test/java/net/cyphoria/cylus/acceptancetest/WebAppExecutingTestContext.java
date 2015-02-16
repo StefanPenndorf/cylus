@@ -17,16 +17,10 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.htmlunit.MockMvcWebConnection;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
  * @author Stefan Pennndorf <stefan@cyphoria.net>
@@ -34,21 +28,9 @@ import org.springframework.web.context.WebApplicationContext;
 @Configuration
 public class WebAppExecutingTestContext {
 
-    @Autowired
-    WebApplicationContext context;
-
-    @Bean(destroyMethod = "close")
+    @Bean
     public WebDriver webDriver() {
-        final MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-
-        return new HtmlUnitDriver() {
-            @Override
-            protected WebClient modifyWebClient(final WebClient client) {
-                final WebClient webClient = super.modifyWebClient(client);
-                webClient.setWebConnection(new MockMvcWebConnection(mockMvc, ""));
-                return webClient;
-            }
-        };
+        return new HtmlUnitDriver();
     }
 
 }

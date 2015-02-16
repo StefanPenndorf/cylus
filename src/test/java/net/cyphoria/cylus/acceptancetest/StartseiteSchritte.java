@@ -37,7 +37,7 @@ public class StartseiteSchritte extends AbstractSchritte {
 
     @Wenn("^ich die erste Seite aufrufe$")
     public void ich_die_erste_Seite_aufrufe() throws Throwable {
-        goTo("http://localhost/");
+        goTo(getBaseUrl());
     }
 
     @Dann("^wird der Titel \"([^\"]*)\" angezeigt$")
