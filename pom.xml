@@ -34,7 +34,6 @@
         <spring-boot.version>1.2.1.RELEASE</spring-boot.version>
         <spring-data-neo4j.version>3.2.2.RELEASE</spring-data-neo4j.version>
         <neo4j.version>2.1.5</neo4j.version>
-        <spring-security.version>3.2.5.RELEASE</spring-security.version>
         <cucumber.tags></cucumber.tags>
     </properties>
     <prerequisites>
@@ -86,9 +85,8 @@
             <version>${spring-data-neo4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring-security.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>
