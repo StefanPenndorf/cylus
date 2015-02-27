@@ -31,7 +31,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>1.2.1.RELEASE</spring-boot.version>
+        <spring-boot.version>1.2.2.RELEASE</spring-boot.version>
         <spring-data-neo4j.version>3.2.2.RELEASE</spring-data-neo4j.version>
         <neo4j.version>2.1.5</neo4j.version>
         <cucumber.tags></cucumber.tags>
@@ -92,7 +92,6 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.3.2</version>
         </dependency>
 
         
