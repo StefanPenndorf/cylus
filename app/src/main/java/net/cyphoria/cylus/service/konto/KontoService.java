@@ -24,7 +24,7 @@ import net.cyphoria.cylus.domain.Konto;
 import java.util.Optional;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public interface KontoService {
 

@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @IntegrationTest
 @ContextConfiguration(classes = Cylus.class, initializers = ConfigFileApplicationContextInitializer.class)

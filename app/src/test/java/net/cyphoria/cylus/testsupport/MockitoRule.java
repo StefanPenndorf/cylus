@@ -24,7 +24,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public class MockitoRule implements MethodRule {
 

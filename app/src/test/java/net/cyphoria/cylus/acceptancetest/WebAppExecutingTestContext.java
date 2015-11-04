@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @Configuration
 public class WebAppExecutingTestContext {

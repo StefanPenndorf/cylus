@@ -23,7 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author Stefan Penndoorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @EnableAutoConfiguration
 @EnableTransactionManagement

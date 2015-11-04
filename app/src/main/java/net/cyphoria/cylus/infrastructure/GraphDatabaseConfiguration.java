@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Profile;
  * nicht für den produktiven Einsatz geeignet (da sollte die Graph-DB sowieso von außen
  * bereitgestellt werden.
  *
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @Profile("graph-store")
 @Configuration

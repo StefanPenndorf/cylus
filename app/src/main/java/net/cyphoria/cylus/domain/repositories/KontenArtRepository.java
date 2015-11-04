@@ -21,7 +21,7 @@ import net.cyphoria.cylus.domain.KontenArt;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public interface KontenArtRepository extends PagingAndSortingRepository<KontenArt, Long> {
 

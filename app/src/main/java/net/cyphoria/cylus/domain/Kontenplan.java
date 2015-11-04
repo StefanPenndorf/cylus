@@ -25,7 +25,7 @@ import org.springframework.core.style.ToStringCreator;
 import java.util.Collection;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public class Kontenplan {
     private final ImmutableSet<Konto> konten;

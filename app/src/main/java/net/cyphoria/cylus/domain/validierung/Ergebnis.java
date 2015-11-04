@@ -18,7 +18,7 @@
 package net.cyphoria.cylus.domain.validierung;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public abstract class Ergebnis {
 

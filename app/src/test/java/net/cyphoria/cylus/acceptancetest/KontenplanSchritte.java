@@ -29,7 +29,7 @@ import org.fluentlenium.core.annotation.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public class KontenplanSchritte extends AbstractSchritte {
 

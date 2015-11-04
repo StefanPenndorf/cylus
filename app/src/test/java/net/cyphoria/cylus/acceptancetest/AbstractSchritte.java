@@ -36,7 +36,7 @@ import java.io.IOException;
  * Basisklasse für Cucumber Schritte, die auch dafür sorgt, dass die Anwendung hochgefahren wird und
  * bereitgestellt wird.
  *
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @ContextConfiguration(
         classes = {Cylus.class, WebAppExecutingTestContext.class},

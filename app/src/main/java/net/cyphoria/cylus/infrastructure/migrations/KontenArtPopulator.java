@@ -30,7 +30,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @Component
 @Order(1)

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @ResponseStatus(NOT_FOUND)
 public class ResourceNotFoundException extends Exception {

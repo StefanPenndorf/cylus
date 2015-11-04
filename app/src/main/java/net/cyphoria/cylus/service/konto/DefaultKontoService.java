@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @Service
 @Transactional(readOnly = true)

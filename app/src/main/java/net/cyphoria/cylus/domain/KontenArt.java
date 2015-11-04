@@ -30,7 +30,7 @@ import java.util.Objects;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @NodeEntity
 @Entity

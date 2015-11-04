@@ -21,7 +21,7 @@ import net.cyphoria.cylus.domain.KontenArt;
 import net.cyphoria.cylus.domain.Konto;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public class KontoForm {
     private String kontoNummer;

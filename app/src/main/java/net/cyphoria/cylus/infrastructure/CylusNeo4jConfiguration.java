@@ -23,7 +23,7 @@ import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @Configuration
 @EnableNeo4jRepositories(basePackages = "net.cyphoria.cylus.domain.repositories")

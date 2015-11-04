@@ -18,7 +18,7 @@
 package net.cyphoria.cylus.infrastructure.migrations;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 public interface Migration {
 

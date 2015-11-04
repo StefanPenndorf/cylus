@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Penndorf
  */
 @Component
 public class Neo4JMigrator implements ApplicationListener<ContextRefreshedEvent> {
