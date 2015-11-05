@@ -35,9 +35,8 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>1.2.2.RELEASE</spring-boot.version>
-        <spring-data-neo4j.version>3.2.2.RELEASE</spring-data-neo4j.version>
-        <neo4j.version>2.1.5</neo4j.version>
+        <spring-boot.version>1.2.7.RELEASE</spring-boot.version>
+        <cucumber-jvm.version>1.2.4</cucumber-jvm.version>
         <cucumber.tags></cucumber.tags>
     </properties>
     <prerequisites>
@@ -52,6 +51,18 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber-jvm.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-spring</artifactId>
+                <version>${cucumber-jvm.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -73,9 +84,12 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                <compilerArgs>
-                    <arg>-Xdoclint:syntax,reference,missing</arg>
-                </compilerArgs></configuration>
+                    <compilerArgs>
+                        <arg>-Xdoclint:syntax,reference,missing</arg>
+                    </compilerArgs>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
