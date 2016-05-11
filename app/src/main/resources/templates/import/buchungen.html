@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  ~ Copyright (c) Stefan Penndorf 2014
+  ~ Copyright (c) Stefan Penndorf 20164
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -15,10 +15,9 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cylus - Kontoauszug Import</title>
+    <title>Cylus - Kontoauszug: Importierte Buchungen</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,23 +28,18 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12">
-            <h1 id="title">Import</h1>
+            <h1 id="title">Import - Buchungen</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-4">
+            <table id="buchungsuebersicht">
+                <tr>
+                    <td class="buchungstext">FOO Is not 42</td>
 
-            <form method="post" action="/import" role="form" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="importDatei">Datei*</label>
-                    <input name="importDatei" id="importDatei" type="file" tabindex="1" />
-                </div>
+                </tr>
 
-                <div class="form-group">
-                    <button id="starteImport" type="submit" tabindex="2" class="btn btn-primary">Importieren</button>
-                    <a href="/" class="btn btn-default pull-right">Abbrechen</a>
-                </div>
-            </form>
+            </table>
         </div>
     </div>
 </div>

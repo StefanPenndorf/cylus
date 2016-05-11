@@ -6,4 +6,5 @@ Funktionalität: Als Anwender
   @Current
   Szenario: Einen Kontoauszug importieren und wandeln.
      Wenn ich einen Konto-Auszug importiere
+     Dann werden die importierten Buchungen angezeigt
      Dann bekomme ich einen aufbereiteten Export zum Download

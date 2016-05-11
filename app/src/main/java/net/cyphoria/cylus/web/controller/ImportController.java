@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Stefan Penndorf 2014
+ * Copyright (c) Stefan Penndorf 2016
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,11 +21,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Pennndorf
  */
 @Controller
 @RequestMapping("/import")
@@ -37,20 +36,22 @@ public class ImportController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
     public String verarbeiteUpload(@RequestParam("importDatei") final MultipartFile file) {
-        String name = file.getName();
-        if(!file.isEmpty()) {
-            try {
-                final byte[] bytes = file.getBytes();
-                final String content = new String(bytes);
-                return "You successfully uploaded " + name + "!\nContent: " + content ;
-            } catch (final Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
-            }
-        } else {
-            return "You failed to upload " + name + " because the file was empty.";
+//        final String name = file.getName();
+        if (file.isEmpty()) {
+            return "import/upload";
         }
+        return "import/buchungen";
+//            try {
+//                final byte[] bytes = file.getBytes();
+//                final String content = new String(bytes, "UTF-8");
+//                return "You successfully uploaded " + name + "!\nContent: " + content ;
+//            } catch (final Exception e) {
+//                return "You failed to upload " + name + " => " + e.getMessage();
+//            }
+//        } else {
+//            return "You failed to upload " + name + " because the file was empty.";
+//        }
     }
 
 }

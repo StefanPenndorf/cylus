@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Stefan Penndorf 2014
+ * Copyright (c) Stefan Penndorf 2016
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 
 package net.cyphoria.cylus.acceptancetest;
 
+import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Wenn;
 import net.cyphoria.cylus.acceptancetest.seiten.ImportSeite;
 import org.fluentlenium.core.annotation.Page;
@@ -27,7 +28,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * @author Stefan Pennndorf <stefan@cyphoria.net>
+ * @author Stefan Pennndorf
  */
 public class ImportPostbankSchritte extends AbstractSchritte {
 
@@ -55,4 +56,8 @@ public class ImportPostbankSchritte extends AbstractSchritte {
         importSeite.importiere(KONTOAUSZUG);
     }
 
+    @Dann("^werden die importierten Buchungen angezeigt$")
+    public void werdenDieImportiertenBuchungenAngezeigt() throws Throwable {
+        importSeite.hatBuchungen("Buchungszeichen FOOBAR", "ELV61312344 07.05 10.54 ME2");
+    }
 }

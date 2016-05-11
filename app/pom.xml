@@ -331,7 +331,7 @@
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>0.0.6</version>
+                <version>2.0.0</version>
                 <executions>
                     <execution>
                         <id>cucumber-report</id>
@@ -343,6 +343,7 @@
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
                             <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
                             <enableFlashCharts>true</enableFlashCharts>
+                            <build.number>42</build.number>
                         </configuration>
                     </execution>
                     <execution>
