@@ -1,0 +1,10 @@
+Umsatzauskunft - gebuchte Umsätze
+Name;Stefan Penndorf
+BLZ;86010090
+Kontonummer;0123456789
+IBAN;DE42860100900123456789
+Aktueller Kontostand;1.088,21 €
+Summe vorgemerkter Umsätze;0,00 €
+
+"Buchungstag";"Wertstellung";"Umsatzart";"Buchungsdetails";"Auftraggeber";"Empfänger";"Betrag (€)";"Saldo (€)"
+"10.05.2016";"10.05.2016";"Überweisung";"Buchungszeichen FOOBAR";"Stefan Penndorf";"Recipient";"-132,19 €";"1.088,21 €"

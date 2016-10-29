@@ -10,6 +10,9 @@ spring:
     jpa:
         hibernate:
             ddl-auto: validate
+    batch:
+         job:
+             enabled: false
 security:
     user:
       name: cylus

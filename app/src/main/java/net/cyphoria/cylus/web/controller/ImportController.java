@@ -17,11 +17,17 @@
 
 package net.cyphoria.cylus.web.controller;
 
+import net.cyphoria.cylus.buchungsimport.CsvImportService;
+import net.cyphoria.cylus.buchungsimport.UploadRepository;
+import net.cyphoria.cylus.buchungsimport.UploadedFileKey;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author Stefan Pennndorf
@@ -30,17 +36,29 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/import")
 public class ImportController {
 
+    @Autowired
+    UploadRepository uploadRepository;
+
+    @Autowired
+    CsvImportService importService;
+
     @RequestMapping(method = RequestMethod.GET)
     public String uploadFormular() {
         return "import/upload";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String verarbeiteUpload(@RequestParam("importDatei") final MultipartFile file) {
+    public String verarbeiteUpload(@RequestParam("importDatei") final MultipartFile file) throws IOException {
 //        final String name = file.getName();
         if (file.isEmpty()) {
             return "import/upload";
         }
+
+        final UploadedFileKey upload = uploadRepository.save(file);
+
+        importService.importCSVFile(upload);
+
+//        csvFileInputChannel.send(new GenericMessage<Object>(new CSVFile(file)));
         return "import/buchungen";
 //            try {
 //                final byte[] bytes = file.getBytes();

@@ -62,3 +62,18 @@ databaseChangeLog:
                 onDelete: CASCADE
                 referencedColumnNames: id
                 referencedTableName: konten_art
+
+  - changeSet:
+        id: 4
+        author: StefanPenndorf
+        changes:
+            - createTable:
+                tableName: buchungs_import_lauf
+                columns:
+                  - column:
+                      name: id
+                      type: bigint
+                      autoIncrement: true
+                      constraints:
+                        primaryKey: true
+                        nullable: false

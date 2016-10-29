@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -50,7 +52,7 @@ public class ImportControllerTest {
     }
 
     @Test
-    public void erfolgreicherUploadZeigtBuchungsübersicht() {
+    public void erfolgreicherUploadZeigtBuchungsübersicht() throws IOException {
         assertThat(controller.verarbeiteUpload(CSV_DATEI), is("import/buchungen"));
     }
 
