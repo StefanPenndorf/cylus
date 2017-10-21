@@ -1,0 +1,22 @@
+version: '3.2'
+
+volumes:
+  neo4j-data:
+
+services:
+  neo4j:
+    image: neo4j:3.2.3
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+      - "7473:7473"
+    # TODO - Volumes mit docker-machine konfigurieren
+    volumes:
+      - "neo4j-data:/data"
+      - "$HOME/neo4j/logs:/logs"
+  cylus:
+    image: stefan-desktop:5000/cyphoria/app3:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - neo4j

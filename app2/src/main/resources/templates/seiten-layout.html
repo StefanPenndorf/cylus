@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<!--
+  ~ Copyright (c) Stefan Penndorf 2014
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cylus - Haushaltsbuch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" href="../../../../target/classes/static/css/style.css"/>
+</head>
+<body>
+<div th:fragment="navigation" >
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Cylus</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/kontenplan">Kontenplan</a></li>
+                <li><a href="/buchung/neu">Neue Buchung</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+
+<div id="main-content">
+    <div>
+        <div>
+            <h1 id="title">Cylus - Seiten Layout</h1>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <div id="footer">
+        &copy; 2017 Stefan Penndorf
+    </div>
+    <!-- /* Scripts included at the end to speed up page loading */ -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+</div>
+</body>
+</html>
