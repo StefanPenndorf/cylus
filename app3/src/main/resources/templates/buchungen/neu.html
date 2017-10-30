@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cylus - Neue Buchung</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/bootstrap/4.0.0-beta-1/css/bootstrap.css}" rel="stylesheet" href="webjars/bootstrap/4.0.0-beta-1/css/bootstrap.css"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="bg-dark text-light">
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" role="navigation">
+    <a class="navbar-brand" href="/">Cylus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/kontenplan">Kontenplan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/buchung/neu">Neue Buchung</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 id="title">Cylus - Neue Buchung</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <form th:action="@{/buchung}" method="POST" class="container">
+                <div class="row">
+
+                    <div class="form-group col-sm-6">
+                        <label for="valutadatum">Valutadatum</label>
+                        <input type="date" class="form-control" id="valutadatum"
+                               th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}"
+                               required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="betrag">Betrag in €</label>
+                        <input type="number" step="0.01" min="0.01" class="form-control" id="betrag"
+                               required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="konto">Konto</label>
+                        <input type="number" min="1000" max="9999" class="form-control" id="konto"
+                               required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="gegenkonto">Gegenkonto</label>
+                        <input type="number" min="1000" max="9999" class="form-control" id="gegenkonto"
+                               required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="buchungstext">Buchungstext</label>
+                        <input type="text" minlength="3" maxlength="100" class="form-control" id="buchungstext"
+                               required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-8 col-md-6">
+                        <label for="kostenstelle">Kostenstelle</label>
+                        <input type="number" min="1" max="100" class="form-control" id="kostenstelle">
+                    </div>
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Anlegen</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/webjars/jquery/3.2.1/jquery.js}" ></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}" ></script>
+<!--<script src="../../../../assets/js/vendor/popper.min.js"></script>-->
+<script th:src="@{/webjars/bootstrap/4.0.0-beta-1/js/bootstrap.min.js}"></script>
+
+<script>
+    $( function() {
+        $( "#konto" ).autocomplete({
+            source: "/konto/search",
+            minLength: 1
+        });
+
+        $( "#gegenkonto" ).autocomplete({
+            source: "/konto/search",
+            minLength: 1
+        });
+    } );
+</script>
+
+</body>
+</html>

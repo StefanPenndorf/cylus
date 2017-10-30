@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cylus - Haushaltsbuch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/webjars/bootstrap/4.0.0-beta-1/css/bootstrap.css}" rel="stylesheet" href="webjars/bootstrap/4.0.0-beta-1/css/bootstrap.css"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="bg-dark">
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" role="navigation">
+    <a class="navbar-brand" href="/">Cylus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/kontenplan">Kontenplan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/buchung/neu">Neue Buchung</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 id="title">Cylus - Haushaltsbuch</h1>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!--<script src="../../../../assets/js/vendor/popper.min.js"></script>-->
+<script th:src="@{/webjars/bootstrap/4.0.0-beta-1/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

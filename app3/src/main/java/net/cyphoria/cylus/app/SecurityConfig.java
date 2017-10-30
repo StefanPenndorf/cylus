@@ -12,12 +12,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.formLogin()
-                .loginPage("/login")
-                .passwordParameter("password")
-                .usernameParameter("login")
-                .loginProcessingUrl("/dologin")
-                .successForwardUrl("/");
+        http
+            .authorizeRequests()
+                .antMatchers("/login", "/dologin").permitAll()
+                .antMatchers("/webjars/**", "/css/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login").permitAll()
+                .failureUrl("/login?error")
+                .defaultSuccessUrl("/hello")
+                .and()
+            .logout().permitAll();
     }
 
 

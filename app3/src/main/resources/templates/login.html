@@ -1,8 +1,31 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
-    <title>Cylus - Login</title>
+    <title>Cylus - Haushaltsbuch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/webjars/bootstrap/4.0.0-beta-1/css/bootstrap.css}" rel="stylesheet" href="webjars/bootstrap/4.0.0-beta-1/css/bootstrap.css"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<h1>Login</h1>
+<div class="container">
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form class="form-signin" th:action="@{/login}" method="POST">
+        <h2 class="form-signin-heading">Bitte melde dich an</h2>
+        <label for="username" class="sr-only">Login</label>
+        <input type="text" id="username" th:name="username" class="form-control" placeholder="Login" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" th:name="password" class="form-control" placeholder="Passwort" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+
+</div>
+
 </body>
 </html>
