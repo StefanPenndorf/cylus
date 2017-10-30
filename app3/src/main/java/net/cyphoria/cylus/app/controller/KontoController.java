@@ -17,6 +17,8 @@ import java.util.List;
 @RequestMapping("/konto")
 public class KontoController {
 
+
+
     @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<KontoNamen> sucheNachId(@RequestParam final String term) {
