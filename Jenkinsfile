@@ -2,7 +2,7 @@ node '', {
     def mvnHome
     stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository
-        git branch: 'start-from-scratch', url: 'https://github.com/KyleRogers/cylus.git'
+        git branch: "${GIT_BRANCH}", url: 'https://github.com/KyleRogers/cylus.git'
         // Get the Maven tool.
         // ** NOTE: This 'M3' Maven tool must be configured
         // **       in the global configuration.
