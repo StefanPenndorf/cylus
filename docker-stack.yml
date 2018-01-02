@@ -5,8 +5,7 @@ volumes:
 
 services:
   postgres:
-   build:
-     context: ./postgres
+   image: stefan-desktop:5000/postgres-cylus-db:1
    volumes:
      - "pg-data:/var/lib/postgresql/data" 
    secrets:
@@ -20,7 +19,6 @@ services:
     depends_on:
       - postgres
 
-# Developement Secrets - DO NOT USE IN PRODUCTION
 secrets:
   postgres-super-pwd:
-    file: ./postgres/secrets/DB_PASSWORD_DEV
+     external: true
