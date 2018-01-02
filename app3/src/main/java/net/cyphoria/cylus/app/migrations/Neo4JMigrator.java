@@ -1,4 +1,4 @@
-/*
+package net.cyphoria.cylus.app.migrations;/*
  * Copyright (c) Stefan Penndorf 2014
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,9 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.cyphoria.cylus.infrastructure.migrations;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -30,8 +27,11 @@ import java.util.List;
 @Component
 public class Neo4JMigrator implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
-    private List<Migration> migrationList;
+    private final List<Migration> migrationList;
+
+    public Neo4JMigrator(final List<Migration> migrationList) {
+        this.migrationList = migrationList;
+    }
 
 
     @Override

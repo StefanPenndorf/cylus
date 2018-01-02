@@ -1,0 +1,7 @@
+
+
+spring:
+    data:
+        neo4j:
+            username: ${ENV.NEO4J.USER}
+            password: ${ENV.NEO4J.PWD}
