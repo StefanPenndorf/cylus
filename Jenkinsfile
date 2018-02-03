@@ -1,4 +1,5 @@
 node '', {
+    echo 'Pulling...' + env.BRANCH_NAME
     def mvnHome
     stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository
@@ -21,4 +22,14 @@ node '', {
             archive 'target/*.jar'
         }
     }
+
+    if (env.BRANCH_NAME == "master) {
+        stage('Build') {
+            dir 'app3', {
+                // Run the maven build
+                echo "Starting Deploy!"
+            }
+        }
+    }
+
 }
