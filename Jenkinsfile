@@ -13,7 +13,7 @@ node '', {
     stage('Build') {
         dir 'app3', {
             // Run the maven build
-            sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+            sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean verify"
         }
     }
     stage('Results') {
@@ -23,11 +23,11 @@ node '', {
         }
     }
 
-    if (env.BRANCH_NAME == "use-postgres") {
+    if (env.BRANCH_NAME == "master") {
         stage('Build') {
             dir 'app3', {
-                // Run the maven build
-                echo "Starting Deploy!"
+                // Deploying to registry
+                sh "'${mvnHome}/bin/mvn' dockerfile:push"
             }
         }
     }
