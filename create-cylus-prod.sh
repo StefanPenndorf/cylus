@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/env bash
 
 docker-machine create --driver virtualbox --engine-insecure-registry stefan-desktop:5000 production
 docker-machine start production

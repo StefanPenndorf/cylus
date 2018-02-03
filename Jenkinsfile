@@ -23,13 +23,4 @@ node '', {
         }
     }
 
-    if (env.BRANCH_NAME == "master") {
-        stage('Build') {
-            dir 'app3', {
-                // Deploying to registry
-                sh "'${mvnHome}/bin/mvn' dockerfile:push"
-            }
-        }
-    }
-
 }
