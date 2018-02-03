@@ -147,6 +147,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <profiles>development</profiles>
+                    <jvmArguments>-Dsecrets.postgres-super-pwd=2033095845zt</jvmArguments>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>

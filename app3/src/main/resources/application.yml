@@ -1,11 +1,18 @@
 
 spring:
   datasource:
-    url: "jdbc:postgresql://localhost:5432/cylus"
+    url: "jdbc:postgresql://postgres:5432/cylusdb"
     username: "cylus"
-    password: "2033095845zt"
+    password: ${secrets.postgres-super-pwd}
   jpa:
     database: "POSTGRESQL"
+
+---
+
+spring:
+  profiles: development
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/cylusdb"
 
 
 ---
