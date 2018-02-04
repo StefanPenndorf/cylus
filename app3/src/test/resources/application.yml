@@ -1,0 +1,12 @@
+
+spring:
+  name: "cylusdb"
+  datasource:
+    url: "jdbc:h2:mem:cylus"
+    username: "sa"
+    password: "sa"
+  jpa:
+   database: HSQL
+
+secrets:
+  cylus-master-pwd: SesamÖffneDich
