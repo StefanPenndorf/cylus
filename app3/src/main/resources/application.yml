@@ -9,6 +9,10 @@ spring:
   jpa:
     database: "POSTGRESQL"
 
+logging:
+  level:
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: WARN
+
 ---
 
 spring:

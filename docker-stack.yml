@@ -20,14 +20,18 @@ services:
       - postgres
     secrets:
       - postgres-super-pwd
-  pgadmin:
-    image: dpage/pgadmin4
-    ports:
-      - "8765:80"
-    depends_on:
-      - postgres
+      - cylus-master-pwd
+# Commented Out: For debugging purpose only
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    ports:
+#      - "8765:80"
+#    depends_on:
+#      - postgres
 
 
 secrets:
   postgres-super-pwd:
+     external: true
+  cylus-master-pwd:
      external: true

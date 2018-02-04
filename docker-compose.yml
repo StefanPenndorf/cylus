@@ -23,8 +23,11 @@ services:
       - postgres
     secrets:
       - postgres-super-pwd
+      - cylus-master-pwd
 
 # Developement Secrets - DO NOT USE IN PRODUCTION
 secrets:
   postgres-super-pwd:
     file: ./postgres/secrets/DB_PASSWORD_DEV
+  cylus-master-pwd:
+    file: ./CYLUS_PASSWORD_DEV

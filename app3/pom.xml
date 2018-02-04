@@ -149,7 +149,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <profiles>development</profiles>
-                    <jvmArguments>-Dsecrets.postgres-super-pwd=2033095845zt</jvmArguments>
+                    <jvmArguments>-Dsecrets.postgres-super-pwd=2033095845zt -Dsecrets.cylus-master-pwd=test</jvmArguments>
                 </configuration>
             </plugin>
             <plugin>
