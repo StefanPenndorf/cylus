@@ -1,6 +1,8 @@
 
 spring:
   datasource:
+    name: "cylusdb"
+    driverClassName: org.postgresql.Driver
     url: "jdbc:postgresql://postgres:5432/cylusdb"
     username: "cylus"
     password: ${secrets.postgres-super-pwd}
