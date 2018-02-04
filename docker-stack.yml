@@ -5,29 +5,33 @@ volumes:
 
 services:
   postgres:
-    build:
-      context: ./postgres
+    image: stefan-desktop:5000/postgres-cylus-db:2
     volumes:
       - "pg-data:/var/lib/postgresql/data"
     secrets:
       - postgres-super-pwd
     environment:
       - POSTGRES_PASSWORD_FILE=/run/secrets/postgres-super-pwd
-    ports:
-      - "5432:5432"
   cylus:
     image: stefan-desktop:5000/cyphoria/app3:latest
     ports:
-      - "8079:8080"
+      - "8080:8080"
     depends_on:
       - postgres
     secrets:
       - postgres-super-pwd
       - cylus-master-pwd
+# Commented Out: For debugging purpose only
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    ports:
+#      - "8765:80"
+#    depends_on:
+#      - postgres
 
-# Developement Secrets - DO NOT USE IN PRODUCTION
+
 secrets:
   postgres-super-pwd:
-    file: ./postgres/secrets/DB_PASSWORD_DEV
+     external: true
   cylus-master-pwd:
-    file: ./CYLUS_PASSWORD_DEV
+     external: true

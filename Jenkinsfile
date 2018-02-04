@@ -1,4 +1,5 @@
 node '', {
+    echo 'Pulling...' + env.BRANCH_NAME
     def mvnHome
     stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository
@@ -12,7 +13,7 @@ node '', {
     stage('Build') {
         dir 'app3', {
             // Run the maven build
-            sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+            sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean verify"
         }
     }
     stage('Results') {
@@ -21,4 +22,5 @@ node '', {
             archive 'target/*.jar'
         }
     }
+
 }
